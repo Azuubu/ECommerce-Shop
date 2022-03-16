@@ -33,4 +33,3 @@ clearInput.addEventListener('click', () => {
   inputField.value = '';
   inputField.focus();
 });
-let y = 8;
