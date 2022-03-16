@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Hubballi&family=League+Gothic&family=Smooch+Sans:wght@300&display=swap');
+
+/* -> Fonts in import:
+1. 'BhuTuka Expanded One', cursive
+2. 'Hubballi', cursive
+3. 'League Gothic', sans-serif
+4. 'Smooch Sans', sans-serif
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Smooch Sans', sans-serif;
+}
+
+body {
+  scroll-behavior: smooth;
+  background-color: brown;
+}
+
+header {
+  background-color: rgb(37, 189, 23);
+  box-shadow: 0 1px 6px black;
+}
+
+li {
+  list-style: none;
+  font-weight: 600;
+}
+
+.navMenu a,
+.name {
+  color: black;
+}
+
+a {
+  text-decoration: none;
+}
+
+.name {
+  font-size: 1.7em;
+  font-family: 'League Gothic', sans-serif;
+  user-select: none;
+}
+
+/* ---- NAVBAR  --------------------------- */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 1em;
+  margin-left: 1em;
+  min-height: 6em;
+}
+
+.navMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5em;
+  font-size: 2.2em;
+  margin-right: 1em;
+}
+
+.navMenu a {
+  transition: 0.4s ease;
+}
+
+.navMenu li i {
+  padding-right: 0.3em;
+  display: none;
+}
+
+/* ------ NAVMENU HOVERS -------------------------*/
+
+.navMenu a:hover {
+  color: white;
+}
+.navMenu li:hover {
+  box-shadow: 0 1px white;
+}
+
+/*  --- SEARCHBAR  ---------------------------- */
+.searchbar {
+  display: flex;
+  width: fit-content;
+  border-radius: 0.5em;
+  align-items: center;
+  background-color: white;
+  min-height: 1.4em;
+  font-size: 1.3em;
+  margin-left: 0.3em;
+  margin-right: auto;
+  box-shadow: 0 1px 5px black;
+}
+
+.searchbar input {
+  min-width: 18vw;
+  min-height: 3vh;
+  border: none;
+  outline: none;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.fa-magnifying-glass,
+.fa-xmark {
+  padding: 0.2em;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.fa-magnifying-glass {
+  border-radius: 0.5em;
+}
+.fa-magnifying-glass:hover {
+  background-color: #c8c8c8;
+}
+
+/* ---- HAMBURGER ----------------------- */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  margin-left: 0.8em;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: black;
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ----  MEDIA QUERIES ------------------------ */
+
+@media (max-width: 780px) {
+  .hamburger {
+    display: block;
+  }
+  .name {
+    font-size: 2.2em;
+  }
+
+  /* --- Below is the popping up hamburger menu <3 */
+  .navMenu {
+    position: fixed;
+    left: -100%;
+    top: 90px;
+    gap: 0;
+    flex-direction: column;
+    background-color: rgb(37, 189, 23);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  .navMenu li {
+    margin: 0.2em 0;
+    border-bottom: 1px solid black;
+  }
+
+  .navMenu.active {
+    left: 0;
+    border-top: 1px solid black;
+  }
+
+  .navMenu.active li:hover {
+    box-shadow: none;
+  }
+
+  .navMenu.active li i {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navMenu {
+    font-size: 1.8em;
+  }
+}
+
+@media (min-width: 2000px) {
+  body {
+    font-size: 1.5em;
+  }
+}
+
+/* -----  GRID -------------------- */
+
+.gridParent {
+  display: grid;
+  /* grid-template-areas:  OGARNĄĆ U TEGO POWELLA, GRID AREAS I ZROBIĆ DOBRZE FOOTER ŻEBY SIĘ ŁADNIE SKALOWAŁ */
+}
+
+.items {
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  /* Może trzeba będzie potem użyć align-items lub czegoś takiego jak już będą zdjęcia produktów itd */
+
+  font-size: 1.8em;
+  gap: 2em;
+  margin-top: 1.5em;
+}
+
+/* ---- INFO DIV  ------------- */
+.info {
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 2em;
+}
+
+.info h2 {
+  font-size: 2.5em;
+}
+
+.info p {
+  font-size: 1.7em;
+}
+
+/* ----- FOOTER -------- */
+footer {
+  font-size: 0.9rem;
+}
+.footerMenu {
+  display: flex;
+  justify-content: space-around;
+  gap: 3em;
+  flex-wrap: wrap-reverse;
+}
+
+.footerMenu li,
+.footerMenu a {
+  color: black;
+}
+
+footer i {
+  padding: 0.5em;
+}
+
+/* ! TO DO LIST:
+-> Ogarnąć u Powella na YT, grid areas i zrobić z nimi ładny układ strony żeby te produkty siedziały u góry, potem wzmianka z tym
+.info i na koniec żeby na samym dole siedział responsive footer ^^
+
+-> Ogarnąć co zrobić z rozmiarem czcionki żeby był responsive w zależności od rozmiaru strony, bo póki co to wygląda tak jakby
+na małych ekranach było git, ale im większa rozdzielczość tym gorzej widać literki.
+  Po prostu, żeby te literki się ładnie zmniejszały minimalnie razem ze zmniejszaniem się rozdziałki, i rosły - ze zwiększaniem
+
+-> Zabrać się za naukę connectowania API endpointów do frontend website'u
+
+-> Jak już będzie dużo zrobione, i rzeczywiście będzie co miało zajmowac miejsce na tej stronie, to do CONTACT dodać żeby 
+w smooth sposób zjeżdzało na dół do footera, żeby pokazało dane kontaktowe i social media
+*/
