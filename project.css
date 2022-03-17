@@ -15,11 +15,11 @@
 
 body {
   scroll-behavior: smooth;
-  background-color: brown;
+  background-color: #d7cec7;
 }
 
 header {
-  background-color: rgb(37, 189, 23);
+  background-color: #76323f;
   box-shadow: 0 1px 6px black;
 }
 
@@ -88,7 +88,7 @@ nav {
   border-radius: 0.5em;
   align-items: center;
   background-color: white;
-  min-height: 1.4em;
+  min-height: 1.9em;
   font-size: 1.3em;
   margin-left: 0.3em;
   margin-right: auto;
@@ -100,8 +100,13 @@ nav {
   min-height: 3vh;
   border: none;
   outline: none;
-  font-size: 0.7em;
+  font-size: 1em;
   font-weight: 600;
+  padding-left: 2px;
+}
+
+.searchbar input::placeholder {
+  color: black;
 }
 
 .fa-magnifying-glass,
@@ -164,10 +169,11 @@ nav {
     top: 90px;
     gap: 0;
     flex-direction: column;
-    background-color: rgb(37, 189, 23);
+    background-color: #76323f;
     width: 100%;
     text-align: center;
     transition: 0.3s;
+    opacity: 0.9;
   }
 
   .navMenu li {
@@ -178,6 +184,7 @@ nav {
   .navMenu.active {
     left: 0;
     border-top: 1px solid black;
+    border-bottom: 1px solid black;
   }
 
   .navMenu.active li:hover {
@@ -186,6 +193,11 @@ nav {
 
   .navMenu.active li i {
     display: inline-block;
+  }
+
+  .navMenu.active .contact {
+    margin-bottom: 0;
+    border: none;
   }
 }
 
@@ -199,23 +211,77 @@ nav {
   body {
     font-size: 1.5em;
   }
+  .searchbar {
+    min-height: 1.9em;
+  }
+  .name {
+    padding-right: 2em;
+    font-size: 2.5em;
+  }
 }
 
+@media (max-width: 550px) {
+  .footerMenu {
+    display: grid;
+  }
+}
+
+@media (min-width: 550px) {
+  .footerMenu {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .items .product {
+    max-width: 40vw;
+    padding: 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  .items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2em;
+  }
+}
+
+@media (max-width: 500px) {
+  .items .product {
+    max-width: 90vw;
+  }
+}
 /* -----  GRID -------------------- */
 
 .gridParent {
   display: grid;
-  /* grid-template-areas:  OGARNĄĆ U TEGO POWELLA, GRID AREAS I ZROBIĆ DOBRZE FOOTER ŻEBY SIĘ ŁADNIE SKALOWAŁ */
 }
 
 .items {
-  grid-template-columns: 1fr 1fr;
   text-align: center;
-  /* Może trzeba będzie potem użyć align-items lub czegoś takiego jak już będą zdjęcia produktów itd */
-
+  margin-left: 1em;
+  margin-right: 1em;
   font-size: 1.8em;
-  gap: 2em;
   margin-top: 1.5em;
+}
+
+.items a {
+  color: black;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+}
+
+.items li {
+  letter-spacing: 0.08em;
 }
 
 /* ---- INFO DIV  ------------- */
@@ -233,15 +299,23 @@ nav {
   font-size: 1.7em;
 }
 
+/* -------  IMAGES ------------------------ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+  border-radius: 10px;
+}
+
 /* ----- FOOTER -------- */
 footer {
+  margin-top: 10em;
+  margin-bottom: 1em;
   font-size: 0.9rem;
 }
 .footerMenu {
-  display: flex;
   justify-content: space-around;
-  gap: 3em;
-  flex-wrap: wrap-reverse;
 }
 
 .footerMenu li,
@@ -251,6 +325,15 @@ footer {
 
 footer i {
   padding: 0.5em;
+}
+
+footer .mail,
+.number {
+  cursor: default;
+}
+
+footer .facebook a:hover {
+  color: white;
 }
 
 /* ! TO DO LIST:
