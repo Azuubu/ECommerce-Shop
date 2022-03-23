@@ -1,20 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Hubballi&family=League+Gothic&family=Smooch+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almarai&family=Bungee&family=Cookie&family=Hurricane&family=League+Gothic&family=Smooch+Sans:wght@300&display=swap');
 
 /* -> Fonts in import:
-1. 'BhuTuka Expanded One', cursive
-2. 'Hubballi', cursive
-3. 'League Gothic', sans-serif
-4. 'Smooch Sans', sans-serif
+font-family: 'Almarai', sans-serif;
+font-family: 'Bungee', cursive;
+font-family: 'Cookie', cursive;
+font-family: 'Hurricane', cursive;
+font-family: 'League Gothic', sans-serif;
+font-family: 'Smooch Sans', sans-serif;
 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Smooch Sans', sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  scroll-behavior: smooth;
   background-color: #d7cec7;
 }
 
@@ -39,8 +41,8 @@ a {
 
 .name {
   font-size: 1.7em;
-  font-family: 'League Gothic', sans-serif;
   user-select: none;
+  font-family: 'League Gothic', sans-serif;
 }
 
 /* ---- NAVBAR  --------------------------- */
@@ -90,13 +92,14 @@ nav {
   background-color: white;
   min-height: 1.9em;
   font-size: 1.3em;
-  margin-left: 0.3em;
+  margin-left: 1em;
   margin-right: auto;
   box-shadow: 0 1px 5px black;
 }
 
 .searchbar input {
-  min-width: 18vw;
+  min-width: 15vw;
+  max-width: 30vw;
   min-height: 3vh;
   border: none;
   outline: none;
@@ -164,7 +167,7 @@ nav {
 
   /* --- Below is the popping up hamburger menu <3 */
   .navMenu {
-    position: fixed;
+    position: absolute; /* position: fixed changed => position: absolute */
     left: -100%;
     top: 90px;
     gap: 0;
@@ -254,9 +257,20 @@ nav {
 
 @media (max-width: 500px) {
   .items .product {
-    max-width: 90vw;
+    max-width: 75vw;
   }
 }
+
+@media (min-width: 1000px) {
+  .items li {
+    max-width: 18vw;
+    margin: 0 auto;
+  }
+  .name {
+    font-size: 2.5em;
+  }
+}
+
 /* -----  GRID -------------------- */
 
 .gridParent {
@@ -267,8 +281,12 @@ nav {
   text-align: center;
   margin-left: 1em;
   margin-right: 1em;
-  font-size: 1.8em;
+  font-size: 1.5em;
   margin-top: 1.5em;
+}
+
+.items li {
+  letter-spacing: 0.07em;
 }
 
 .items a {
@@ -280,8 +298,13 @@ nav {
   flex-direction: column;
 }
 
-.items li {
-  letter-spacing: 0.08em;
+.productName a {
+  font-family: 'Almarai', sans-serif;
+}
+
+.productPrice {
+  background-color: #76323f;
+  color: white;
 }
 
 /* ---- INFO DIV  ------------- */
@@ -293,10 +316,26 @@ nav {
 
 .info h2 {
   font-size: 2.5em;
+  letter-spacing: 0.1em;
+  font-family: 'Bungee', cursive;
 }
 
 .info p {
   font-size: 1.7em;
+  letter-spacing: 0.05em;
+  font-family: 'Cookie', cursive;
+}
+
+/* ----- INFO MERCH --------------------- */
+
+.merchInfo h2 {
+  font-size: 1.5em;
+  font-family: 'Almarai', sans-serif;
+}
+
+.merchInfo {
+  margin-top: 3em;
+  text-align: center;
 }
 
 /* -------  IMAGES ------------------------ */
@@ -309,6 +348,7 @@ img {
 }
 
 /* ----- FOOTER -------- */
+
 footer {
   margin-top: 10em;
   margin-bottom: 1em;
@@ -337,8 +377,6 @@ footer .facebook a:hover {
 }
 
 /* ! TO DO LIST:
--> Ogarnąć u Powella na YT, grid areas i zrobić z nimi ładny układ strony żeby te produkty siedziały u góry, potem wzmianka z tym
-.info i na koniec żeby na samym dole siedział responsive footer ^^
 
 -> Ogarnąć co zrobić z rozmiarem czcionki żeby był responsive w zależności od rozmiaru strony, bo póki co to wygląda tak jakby
 na małych ekranach było git, ale im większa rozdzielczość tym gorzej widać literki.
@@ -349,3 +387,36 @@ na małych ekranach było git, ale im większa rozdzielczość tym gorzej widać
 -> Jak już będzie dużo zrobione, i rzeczywiście będzie co miało zajmowac miejsce na tej stronie, to do CONTACT dodać żeby 
 w smooth sposób zjeżdzało na dół do footera, żeby pokazało dane kontaktowe i social media
 */
+
+/* ------- ARROW BACKGROUND -------------- */
+
+/* .arrow-pointer {
+  width: 250px;
+  height: 50px;
+  background: #76323f;
+  position: absolute;
+}
+
+.arrow-pointer::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 25px solid #d7cec7;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+}
+
+.arrow-pointer::before {
+  content: '';
+  position: absolute;
+  right: -25px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 25px solid #76323f;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+} */
