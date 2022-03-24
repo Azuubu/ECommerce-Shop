@@ -167,7 +167,7 @@ nav {
 
   /* --- Below is the popping up hamburger menu <3 */
   .navMenu {
-    position: absolute; /* position: fixed changed => position: absolute */
+    position: absolute; /* position: fixed changed for => position: absolute */
     left: -100%;
     top: 90px;
     gap: 0;
@@ -177,6 +177,7 @@ nav {
     text-align: center;
     transition: 0.3s;
     opacity: 0.9;
+    z-index: 1;
   }
 
   .navMenu li {
@@ -188,6 +189,10 @@ nav {
     left: 0;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
+  }
+
+  .navMenu.active a:active {
+    color: white; /* Makes the nav items white when clicked (mobile display) */
   }
 
   .navMenu.active li:hover {
@@ -240,10 +245,10 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1em;
   }
   .items .product {
     max-width: 40vw;
-    padding: 1em;
   }
 }
 
@@ -285,8 +290,15 @@ nav {
   margin-top: 1.5em;
 }
 
+ul li {
+  justify-self: center;
+}
+
 .items li {
   letter-spacing: 0.07em;
+  margin: 2px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .items a {
@@ -296,15 +308,21 @@ nav {
 .product {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.productName a {
+.productName {
   font-family: 'Almarai', sans-serif;
+}
+
+.productName {
+  background-color: white;
 }
 
 .productPrice {
   background-color: #76323f;
   color: white;
+  letter-spacing: 5px;
 }
 
 /* ---- INFO DIV  ------------- */
@@ -344,7 +362,9 @@ img {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  user-select: none;
 }
 
 /* ----- FOOTER -------- */
@@ -374,6 +394,39 @@ footer .mail,
 
 footer .facebook a:hover {
   color: white;
+}
+
+.items li {
+  position: relative;
+}
+
+/* Hovered [ Add To Cart ] - button */
+
+.fa-cart-plus {
+  padding-right: 5px;
+}
+
+.addToCart {
+  position: absolute;
+  padding: 5px;
+  z-index: 1;
+  top: 55%;
+  right: 15%;
+  border: none;
+  background-color: #76323f;
+  color: white;
+  font-size: 0.8em;
+  letter-spacing: 3px;
+  font-family: 'League Gothic', sans-serif;
+  cursor: pointer;
+  opacity: 1;
+  transition: 0.4s;
+  opacity: 0;
+}
+
+.addToCart.active {
+  opacity: 1;
+  right: 0;
 }
 
 /* ! TO DO LIST:
