@@ -26,52 +26,48 @@ clearInput.addEventListener('click', () => {
 /* Popping up add to cart button */
 
 const addToCart = document.querySelectorAll('.addToCart');
+const wholeProduct = document.querySelectorAll('.product');
 
-const wholeProduct = document.querySelectorAll('.wholeProduct');
-
-wholeProduct.forEach((n) =>
-  n.addEventListener('mouseenter', () => {
-    addToCart.forEach((n) => n.classList.toggle('active'));
-    wholeProduct.forEach((n) => (n.style.opacity = '0.6'));
-    addToCart.forEach((n) => (n.style.opacity = '1'));
-  })
-);
-
-wholeProduct.forEach((n) =>
-  n.addEventListener('mouseleave', () => {
-    addToCart.forEach((n) => n.classList.toggle('active'));
-    wholeProduct.forEach((n) => (n.style.opacity = '1'));
-    addToCart.forEach((n) => (n.style.opacity = '0'));
-  })
-);
-
-// Renders products to the DOM
-
-const productsEl = document.querySelector('.items');
-
-function renderProducts() {
-  products.forEach((product) => {
-    productsEl.innerHTML += `
-    <li class="wholeProduct">
-          <button class="addToCart">
-            <i class="fa-solid fa-cart-plus"></i>ADD TO CART
-          </button>
-          <div class="product one">
-            <img src="${product.imgSrc}" alt="product 1" />
-            <div class="productName">${product.name}</div>
-            <div class="productPrice">$ ${product.price}</div>
-          </div>
-        </li>
-    `;
+wholeProduct.forEach((product, button) => {
+  product.addEventListener('mouseenter', () => {
+    product.classList.add('active');
+    button = product.previousElementSibling;
+    button.classList.add('active');
   });
-}
+});
 
-renderProducts();
+wholeProduct.forEach((product, button) => {
+  product.addEventListener('mouseleave', () => {
+    product.classList.remove('active');
+    button = product.previousElementSibling;
+    button.classList.remove('active');
+  });
+});
 
-// Adding to cart
+addToCart.forEach((button, product) => {
+  button.addEventListener('mouseenter', () => {
+    button.classList.add('active');
+    product = button.nextElementSibling;
+    product.classList.add('active');
+  });
+});
 
-const cart = [];
+addToCart.forEach((button, product) => {
+  button.addEventListener('mouseleave', () => {
+    button.classList.remove('active');
+    product = button.nextElementSibling;
+    product.classList.remove('active');
+  });
+});
 
-function addItem(id) {
-  const item = products.find((product) => product.id === id);
-}
+addToCart.forEach((button) => {
+  button.addEventListener('mouseenter', () => {
+    button.classList.add('active');
+  });
+});
+
+addToCart.forEach((button) => {
+  button.addEventListener('mouseleave', () => {
+    button.classList.remove('active');
+  });
+});
