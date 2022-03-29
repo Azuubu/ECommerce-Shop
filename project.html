@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
     <link rel="stylesheet" href="project.css" />
     <script
       src="https://kit.fontawesome.com/71d9d8834f.js"
@@ -19,7 +20,12 @@
         <!-- Searchbar -->
         <div class="searchbar">
           <i class="fa-solid fa-xmark"></i>
-          <input type="text" placeholder="Search..." class="input" />
+          <input
+            type="text"
+            placeholder="Search..."
+            class="input"
+            spellcheck="false"
+          />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
 
@@ -61,6 +67,25 @@
       </nav>
     </header>
 
+    <!-- Popping Shopping Cart /starts here// -->
+
+    <div class="shoppingCartContainer">
+      <div class="shoppingCartProducts">
+        <div class="shoppingCartSingleProduct">
+          przykładowy produkt, który będzie dodawany dynamicznie z uzyciem JS
+        </div>
+        <div class="shoppingCartSingleProduct">
+          przykładowy produkt, który będzie dodawany dynamicznie z uzyciem JS
+        </div>
+      </div>
+
+      <footer>
+        <section class="totalBalance">Total: $'dynamic value'</section>
+
+        <button type="button" class="purchaseButton">Purchase</button>
+      </footer>
+    </div>
+
     <!-- Grid Parent Under -->
     <div class="gridParent">
       <ul class="items">
@@ -71,7 +96,7 @@
           <div class="product one">
             <img src="/Images/item1.jpg" alt="product 1" />
             <div class="productName">Mini Sofa</div>
-            <div class="productPrice">$ 79.99</div>
+            <div class="productPrice">$ 59.99</div>
           </div>
         </li>
 
@@ -82,7 +107,7 @@
           <div class="product two">
             <img src="/Images/item2.jpg" alt="product 2" />
             <div class="productName">Old Fashioned Chair</div>
-            <div class="productPrice">$ 49.99</div>
+            <div class="productPrice">$ 19.99</div>
           </div>
         </li>
 
@@ -94,7 +119,7 @@
             <img src="/Images/item3.jpg" alt="product 3" />
 
             <div class="productName">Oak Cupboard</div>
-            <div class="productPrice">$ 109.99</div>
+            <div class="productPrice">$ 69.99</div>
           </div>
         </li>
 
@@ -106,7 +131,7 @@
             <img src="/Images/item4.jpg" alt="product 4" />
 
             <div class="productName">Modern Coffee Table</div>
-            <div class="productPrice">$ 59.99</div>
+            <div class="productPrice">$ 39.99</div>
           </div>
         </li>
       </ul>
@@ -117,7 +142,7 @@
         <p>With us.. You, can make the house of your dreams.</p>
       </div>
 
-      <ul class="items">
+      <ul class="items secondUl">
         <li class="wholeProduct">
           <div class="addToCart">
             <i class="fa-solid fa-cart-plus"></i>Add to cart
@@ -138,7 +163,7 @@
             <img src="/Images/item6.jpg" alt="product 6" />
 
             <div class="productName">Custom Chair</div>
-            <div class="productPrice">$ 39.99</div>
+            <div class="productPrice">$ 19.99</div>
           </div>
         </li>
 
@@ -150,7 +175,7 @@
             <img src="/Images/item7.jpg" alt="product 7" />
 
             <div class="productName">Wooden End Table</div>
-            <div class="productPrice">$ 49.99</div>
+            <div class="productPrice">$ 39.99</div>
           </div>
         </li>
 
@@ -174,25 +199,26 @@
       </div>
 
       <!-- Footer -->
-
-      <footer id="contactInfo">
-        <ul class="footerMenu">
-          <li class="facebook">
-            <a href="#">
-              <i class="fa-brands fa-facebook-square"></i>Our Facebook
-            </a>
-          </li>
-
-          <li class="mail">
-            <i class="fa-solid fa-envelope"></i>e-commerceshop@gmail.com
-          </li>
-
-          <li class="number">
-            <i class="fa-solid fa-square-phone"></i>123-456-789
-          </li>
-        </ul>
-      </footer>
     </div>
+
+    <footer id="contactInfo">
+      <ul class="footerMenu">
+        <li class="facebook">
+          <a href="#">
+            <i class="fa-brands fa-facebook-square"></i>Our Facebook
+          </a>
+        </li>
+
+        <li class="mail">
+          <i class="fa-solid fa-envelope"></i>e-commerceshop@gmail.com
+        </li>
+
+        <li class="number">
+          <i class="fa-solid fa-square-phone"></i>123-456-789
+        </li>
+      </ul>
+    </footer>
+
     <script src="products.js"></script>
     <script src="index.js"></script>
   </body>
