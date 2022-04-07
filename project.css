@@ -11,19 +11,19 @@ font-family: 'Roboto', sans-serif;
 */
 :root {
   --primary-color: #7aa19a;
+  --bg-color: #d7cec7;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: 'Smooch Sans', sans-serif; */
   font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
   background-color: #d7cec7;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 header {
@@ -77,8 +77,7 @@ nav {
   user-select: none;
 }
 
-.navMenu li i {
-  padding-right: 0.3em;
+.navMenu li .fa-arrow-down {
   display: none;
 }
 
@@ -176,7 +175,7 @@ nav {
 
   /* --- Below is the popping up hamburger menu <3 */
   .navMenu {
-    position: absolute; /* position: fixed changed for => position: absolute */
+    position: absolute;
     left: -100%;
     top: 90px;
     gap: 0;
@@ -185,8 +184,7 @@ nav {
     width: 100%;
     text-align: center;
     transition: 0.3s;
-    opacity: 0.9;
-    z-index: 1;
+    z-index: 3;
     margin-left: 0;
   }
 
@@ -202,7 +200,7 @@ nav {
   }
 
   .navMenu.active a:active {
-    color: white; /* Makes the nav items white when clicked (mobile display) */
+    color: white;
   }
 
   .navMenu.active li:hover {
@@ -286,12 +284,13 @@ nav {
   }
 }
 
-@media (min-height: 1300px) {
+@media (min-width: 1300px) {
   .secondUl,
   div .info {
     margin-top: 0;
   }
 }
+
 /* -----  GRID -------------------- */
 
 .gridParent {
@@ -337,12 +336,16 @@ ul li {
 .productName {
   font-family: 'Roboto', sans-serif;
   background-color: white;
+  cursor: default;
+  user-select: none;
 }
 
 .productPrice {
   background-color: var(--primary-color);
   color: white;
   letter-spacing: 5px;
+  cursor: default;
+  user-select: none;
 }
 
 /* ---- INFO DIV  ------------- */
@@ -410,8 +413,15 @@ footer .mail,
   cursor: default;
 }
 
-footer .facebook a:hover {
+footer .facebook a:hover,
+footer .contact:hover {
   color: white;
+}
+
+.contact,
+.facebook {
+  cursor: pointer;
+  user-select: none;
 }
 
 /* Hovered [ Add To Cart ] - button *********** */
@@ -439,6 +449,7 @@ footer .facebook a:hover {
   cursor: pointer;
   transition: 0.35s;
   opacity: 0;
+  user-select: none;
 }
 
 .product.active {
@@ -451,28 +462,60 @@ footer .facebook a:hover {
 }
 
 /* SHOPPING CART W/ PRODUCTS ************** */
-
+.fa-trash,
+.fa-trash::before,
+.fa-trash::after {
+  display: none;
+}
+.shoppingCartProducts .fa-trash,
+.shoppingCartProducts .fa-trash::before {
+  display: block;
+}
 .shoppingCartContainer {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--primary-color);
-  width: fit-content;
-  margin-left: auto;
-  margin-right: 10em;
+  border: 1px solid red;
   text-align: center;
   padding: 1.5em;
+  z-index: 2;
+  position: absolute;
+  right: -300%;
+  bottom: 0;
+  top: 6em;
+  max-width: 45vw;
+  background-color: var(--bg-color);
+  transition: 0.3s;
 }
 
 .shoppingCartProducts {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  max-height: 70vh;
+}
+
+.shoppingCartContainer.active {
+  right: 0;
+}
+
+/* Products Cart Scrollbar */
+.shoppingCartProducts::-webkit-scrollbar {
+  width: 10px;
+}
+
+.shoppingCartProducts::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.shoppingCartProducts::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.shoppingCartProducts::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/*Ends here */
+
+.shoppingCartSingleProduct {
+  background-color: green;
 }
 
 /* ! TO DO LIST: ******************************
 */
-
-/* 
-.gridParent {
-  display: none;
-} */
