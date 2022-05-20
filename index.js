@@ -7,7 +7,7 @@ hamburger.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
 
-document.querySelectorAll('.navLink').forEach((n) =>
+document.querySelectorAll('#navLink').forEach((n) =>
   n.addEventListener('click', () => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
@@ -18,36 +18,63 @@ document.querySelectorAll('.navLink').forEach((n) =>
 
 const addToCart = [...document.querySelectorAll('.addToCart')];
 const wholeProduct = document.querySelectorAll('.product');
+const addToFav = [...document.querySelectorAll('.addToFav')];
 
-wholeProduct.forEach((product, button) => {
+wholeProduct.forEach((product, button, fav) => {
   product.addEventListener('mouseenter', () => {
     product.classList.add('active');
     button = product.previousElementSibling;
     button.classList.add('active');
+
+    fav = button.previousElementSibling;
+    fav.classList.add('active');
   });
+
   product.addEventListener('mouseleave', () => {
     product.classList.remove('active');
     button = product.previousElementSibling;
     button.classList.remove('active');
+    fav.classList.remove('active');
   });
 });
 
-addToCart.forEach((button, product) => {
+addToCart.forEach((button, product, fav) => {
   button.addEventListener('mouseenter', () => {
     button.classList.add('active');
     product = button.nextElementSibling;
     product.classList.add('active');
+
+    fav = button.previousElementSibling;
+    fav.classList.add('active');
   });
   button.addEventListener('mouseleave', () => {
     button.classList.remove('active');
     product = button.nextElementSibling;
     product.classList.remove('active');
+
+    fav.classList.remove('active');
   });
-  button.addEventListener('mouseenter', () => {
+});
+
+addToFav.forEach((fav, button, product) => {
+  fav.addEventListener('mouseenter', () => {
+    fav.classList.add('active');
+
+    button = fav.nextElementSibling;
     button.classList.add('active');
+
+    product = button.nextElementSibling;
+    product.classList.add('active');
   });
-  button.addEventListener('mouseleave', () => {
+
+  fav.addEventListener('mouseleave', () => {
+    fav.classList.remove('active');
+
+    button = fav.nextElementSibling;
     button.classList.remove('active');
+
+    product = button.nextElementSibling;
+    product.classList.remove('active');
   });
 });
 
@@ -66,16 +93,18 @@ class Product {
 
 const cartItemsContainer = document.querySelector('.shoppingCartProducts');
 
+// let itemsInCart = JSON.parse(localStorage.getItem('ShoppingCart'));
+let itemsInCart = [];
+
 addToCart.forEach((button) => {
-  button.addEventListener('click', () => {
-    let itemsInCart = [
-      ...document.querySelectorAll('.shoppingCartSingleProduct'),
-    ];
+  button.addEventListener('click', (e) => {
+    itemsInCart = [...document.querySelectorAll('.shoppingCartSingleProduct')];
+
     const idInCart = itemsInCart.map((item) => item.id);
 
-    let product = button.nextElementSibling;
-    let productName = product.childNodes[3].innerText;
-    let productPrice = product.childNodes[5].innerText;
+    let product = e.target.nextElementSibling;
+    let productName = product.querySelector('.productName').innerText;
+    let productPrice = product.querySelector('.productPrice').innerText;
     let productId = product.id;
 
     let actualQuantity = document.createElement('span');
@@ -124,20 +153,15 @@ addToCart.forEach((button) => {
     quantityArrowIncrease.classList.add('fa-solid');
     quantityArrowIncrease.classList.add('fa-caret-right');
 
-    if (!idInCart.includes(product1.id)) {
-      /* Creating actual DOM elements with each 'click'() */
+    if (!idInCart.includes(productId)) {
       cartItemsContainer.append(singleProduct);
 
-      /* Products Names */
       singleProduct.append(cartNames);
 
-      /* Products Quantities in the Cart */
       singleProduct.append(cartQuantity);
 
-      /* Products Prices */
       singleProduct.append(cartPrices);
 
-      /* Adding trash icon to each product to delete the item */
       cartTrash.append(trashIcon);
       singleProduct.append(cartTrash);
 
@@ -145,7 +169,7 @@ addToCart.forEach((button) => {
       cartNames.append(product1.name);
       cartQuantity.append(actualQuantity);
       cartPrices.append(product1.price);
-      singleProduct.setAttribute('id', product1.id);
+      singleProduct.setAttribute('id', productId);
 
       /* Quantity Arrows [ DECREASE ] **************** */
       cartQuantity.insertBefore(arrowDecreaseDiv, actualQuantity);
@@ -157,46 +181,54 @@ addToCart.forEach((button) => {
 
       /* Deleting Products from cart using trash icons */
 
-      checkIfEmpty();
-
-      cartTrash.addEventListener('click', () => {
-        let fullProduct = cartTrash.parentElement;
-        fullProduct.remove(fullProduct);
-        updateCartTotal();
-        addTextIfEmpty();
-
-        button.innerText = 'Add to cart';
-        button.style.backgroundColor = 'var(--bg-color)';
-        button.style.cursor = 'pointer';
-        button.style.color = 'var(--font-color)';
-
-        console.log(`Deleted ${productName}`);
-      });
-
-      /* Incrementing the quantity of an item --- */
-
-      arrowIncreaseDiv.addEventListener('click', () => {
-        actualQuantity.innerText++;
-        updateCartTotal();
-      });
-
-      arrowDecreaseDiv.addEventListener('click', () => {
-        if (actualQuantity.innerText > 1) {
-          actualQuantity.innerText--;
-          updateCartTotal();
-        } else {
-          return;
-        }
-      });
-
       updateCartTotal();
     } else {
       console.log('This item is already added :) ');
     }
 
+    checkBagCount();
+    checkIfEmpty();
+
+    cartTrash.addEventListener('click', () => {
+      let fullProduct = cartTrash.parentElement;
+      fullProduct.remove(fullProduct);
+
+      updateCartTotal();
+      addTextIfEmpty();
+      checkBagCount();
+
+      button.innerText = 'Add to cart';
+      button.style.backgroundColor = 'var(--bg-color)';
+      button.style.cursor = 'pointer';
+      button.style.color = 'var(--font-color)';
+
+      console.log(`Deleted ${productName}`);
+    });
+
+    /* Incrementing the quantity of an item --- */
+
+    arrowIncreaseDiv.addEventListener('click', () => {
+      actualQuantity.innerText++;
+      updateCartTotal();
+    });
+
+    arrowDecreaseDiv.addEventListener('click', () => {
+      if (actualQuantity.innerText > 1) {
+        actualQuantity.innerText--;
+        updateCartTotal();
+      } else {
+        return;
+      }
+    });
+
+    //   updateCartTotal();
+    // } else {
+    //   console.log('This item is already added :) ');
+    // }
+
     /* Changing the button text when adding the item --- */
 
-    button.innerText = 'Added to cart';
+    button.innerText = 'In the cart';
     button.style.backgroundColor = 'var(--primary-color-active)';
     button.style.cursor = 'default';
     button.style.color = 'whitesmoke';
@@ -222,6 +254,124 @@ addToCart.forEach((button) => {
     });
   });
 });
+
+/* Adding Items to the Wishlist */
+
+addToFav.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    btn.style.cursor = 'default';
+
+    let productName =
+      e.target.parentElement.nextElementSibling.nextElementSibling.querySelector(
+        '.productName'
+      ).innerText;
+
+    let productPrice =
+      e.target.parentElement.nextElementSibling.nextElementSibling.querySelector(
+        '.productPrice'
+      ).innerText;
+
+    let favProductImg =
+      e.target.parentElement.nextElementSibling.nextElementSibling
+        .querySelector('img')
+        .cloneNode();
+
+    let favItemId =
+      e.target.parentElement.nextElementSibling.nextElementSibling.id;
+
+    let wishSpanName = document.createElement('span');
+    let wishSpanPrice = document.createElement('span');
+    wishSpanPrice.classList.add('wishPrice');
+    wishSpanName.classList.add('wishName');
+
+    /* Filling the heart after adding to fav */
+    e.target.remove();
+    let newIcon = document.createElement('i');
+    newIcon.classList.add('ri-heart-fill');
+    btn.append(newIcon);
+
+    // let iconDiv = document.createElement('div');
+    // iconDiv.classList.add('iconDiv');
+
+    let newIconInList = document.createElement('i');
+    newIconInList.classList.add('ri-heart-fill');
+    newIconInList.classList.add('removeFavItem');
+    // iconDiv.append(newIconInList);
+
+    let wishListRow = document.createElement('div');
+    wishListRow.classList.add('wishListRow');
+    wishListRow.setAttribute('id', favItemId);
+
+    let favProductsList = document.querySelector('.productsList');
+    let favItems = [...document.querySelectorAll('.wishListRow')];
+
+    const idInFav = favItems.map((item) => item.id);
+
+    if (!idInFav.includes(wishListRow.id)) {
+      wishSpanName.append(productName);
+      wishSpanPrice.append(productPrice);
+
+      // wishListRow.append(iconDiv);
+      wishListRow.append(newIconInList);
+
+      wishListRow.append(favProductImg);
+      wishListRow.append(wishSpanName);
+      wishListRow.append(wishSpanPrice);
+      favProductsList.append(wishListRow);
+    } else console.log(`It's already added to your wishlist`);
+
+    newIconInList.addEventListener('click', (e) => {
+      e.target.parentElement.remove();
+
+      let changedIcon = btn.children[0];
+      changedIcon.classList.replace('ri-heart-fill', 'ri-heart-line');
+
+      checkFavCount();
+
+      btn.style.cursor = 'pointer';
+    });
+
+    checkFavCount();
+  });
+});
+
+/* Check fav list count ****** */
+
+function checkFavCount() {
+  let productCount = document.querySelector('.productCount');
+  let pluralSuffix = document.querySelector('.products');
+  let favProductsList = document.querySelector('.productsList');
+
+  productCount.innerText = favProductsList.children.length * 1;
+
+  if (productCount.innerText == 1) {
+    pluralSuffix.innerText = 'Product';
+  } else if (productCount.innerText == 0) {
+    productCount.innerText = 'No';
+    pluralSuffix.innerText = 'Products';
+  } else {
+    pluralSuffix.innerText = 'Products';
+  }
+}
+
+/* Check bag count */
+
+function checkBagCount() {
+  let productCount = document.querySelector('.productBagCount');
+  let pluralSuffix = document.querySelector('.productsBag');
+  let bagProductsList = document.querySelector('.shoppingCartProducts');
+
+  productCount.innerText = bagProductsList.children.length * 1 - 1;
+
+  if (productCount.innerText == 1) {
+    pluralSuffix.innerText = 'Product';
+  } else if (productCount.innerText == 0) {
+    productCount.innerText = 'No';
+    pluralSuffix.innerText = 'Products';
+  } else {
+    pluralSuffix.innerText = 'Products';
+  }
+}
 
 /* Clear Cart Button FUNCTION  */
 
@@ -254,11 +404,8 @@ const homeButton = document.querySelector('.home');
 
 homeButton.addEventListener('click', () => {
   shoppingCartContainer.classList.remove('active');
-  profileButton.classList.remove('active');
-  favouriteButton.classList.remove('active');
-
-  // gridParent.classList.remove('hidden');
-  // pageFooter.classList.remove('hidden');
+  favouritesList.classList.remove('active');
+  profileMenu.classList.add('hidden');
 });
 
 /*  Cart Container Page ****************** */
@@ -273,19 +420,19 @@ const pageFooter = document.querySelector('#contactInfo');
 
 shoppingCartButton.addEventListener('click', () => {
   shoppingCartContainer.classList.toggle('active');
-
-  // pageFooter.classList.toggle('hidden');
-  // gridParent.classList.toggle('hidden');
 });
 
 /* Glowing NAV ICONS when their page is displayed --- */
+
 const profileButton = document.querySelector('.profile');
-const favouriteButton = document.querySelector('.favourite');
+
+const favouritesButton = document.querySelector('.favourites');
+const favouritesList = document.querySelector('.favouritesList');
 
 homeButton.addEventListener('click', () => {
-  shoppingCartButton.classList.remove('onDisplayCart');
+  shoppingCartButton.classList.remove('onDisplay');
   profileButton.classList.remove('onDisplay');
-  favouriteButton.classList.remove('onDisplay');
+  favouritesButton.classList.remove('onDisplay');
 });
 
 profileButton.addEventListener('click', () => {
@@ -293,24 +440,32 @@ profileButton.addEventListener('click', () => {
 
   shoppingCartContainer.classList.remove('active');
 
-  favouriteButton.classList.remove('onDisplay');
-  shoppingCartButton.classList.remove('onDisplayCart');
-});
+  shoppingCartButton.classList.remove('onDisplay');
 
-favouriteButton.addEventListener('click', () => {
-  favouriteButton.classList.toggle('onDisplay');
-
-  shoppingCartContainer.classList.remove('active');
-
-  profileButton.classList.remove('onDisplay');
-  shoppingCartButton.classList.remove('onDisplayCart');
+  favouritesButton.classList.remove('onDisplay');
+  favouritesList.classList.remove('active');
 });
 
 shoppingCartButton.addEventListener('click', () => {
-  shoppingCartButton.classList.toggle('onDisplayCart');
+  shoppingCartButton.classList.toggle('onDisplay');
 
   profileButton.classList.remove('onDisplay');
-  favouriteButton.classList.remove('onDisplay');
+
+  profileMenu.classList.add('hidden');
+
+  favouritesButton.classList.remove('onDisplay');
+  favouritesList.classList.remove('active');
+});
+
+favouritesButton.addEventListener('click', () => {
+  favouritesButton.classList.toggle('onDisplay');
+  favouritesList.classList.toggle('active');
+
+  profileButton.classList.remove('onDisplay');
+  profileMenu.classList.add('hidden');
+
+  shoppingCartButton.classList.remove('onDisplay');
+  shoppingCartContainer.classList.remove('active');
 });
 
 /* Updating Cart Total Summ ------- */
@@ -337,7 +492,6 @@ function updateCartTotal() {
   total = Math.round(total * 100) / 100;
   document.getElementsByClassName('dynamicValue')[0].innerText = '$' + total;
 }
-
 /* --- End of the updating cart total --- */
 
 /* Little addition to 'seeMoreProductsButton' */
@@ -372,9 +526,49 @@ function exScroll() {
   window.scrollBy(0, 900);
 }
 
-/* --- Displaying the ::after element [the number of items in the cart] ---*/
+/* PROFILE MENU */
+let profileMenu = document.querySelector('.wrapper');
 
-//! Implement this function to the ::after element on the button tmr
-// function updateItemsNumber() {
+profileButton.addEventListener('click', () => {
+  profileMenu.classList.toggle('hidden');
+});
 
-// }
+const loginText = document.querySelector('.title-text .login');
+const loginForm = document.querySelector('form.login');
+const loginBtn = document.querySelector('label.login');
+const signupBtn = document.querySelector('label.signup');
+const signupLink = document.querySelector('form .signup-link a');
+signupBtn.onclick = () => {
+  loginForm.style.marginLeft = '-50%';
+  loginText.style.marginLeft = '-50%';
+};
+loginBtn.onclick = () => {
+  loginForm.style.marginLeft = '0%';
+  loginText.style.marginLeft = '0%';
+};
+signupLink.onclick = () => {
+  signupBtn.click();
+  return false;
+};
+
+/* Return Arrows */
+
+let returnArrowCart = document.querySelector('.arrowCart');
+returnArrowCart.addEventListener('click', () => {
+  shoppingCartButton.classList.remove('onDisplay');
+
+  shoppingCartContainer.classList.remove('active');
+});
+
+let returnArrowUser = document.querySelector('.arrowUser');
+returnArrowUser.addEventListener('click', () => {
+  profileButton.classList.remove('onDisplay');
+
+  profileMenu.classList.add('hidden');
+});
+
+let returnArrowFav = document.querySelector('.arrowFav');
+returnArrowFav.addEventListener('click', () => {
+  favouritesButton.classList.remove('onDisplay');
+  favouritesList.classList.remove('active');
+});
