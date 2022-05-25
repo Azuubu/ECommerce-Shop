@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="dist/css/main.css">
+    <link rel="stylesheet" href="dist/css/main.css" />
     <link rel="stylesheet" href="project.css" />
     <!-- FONTAWESOME ICONS -->
     <script
       src="https://kit.fontawesome.com/71d9d8834f.js"
       crossorigin="anonymous"
     ></script>
-    
+
     <!-- REMIX ICONS -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
@@ -43,27 +43,19 @@
 
         <ul class="navMenu">
           <li class="home" title="Home">
-            
-              <i class="ri-home-4-line" id="navLink"></i>
-            
+            <i class="ri-home-4-line" id="navLink"></i>
           </li>
 
           <li class="profile" title="User Profile">
-            
-              <i class="ri-user-line" id="navLink"></i>
-            
+            <i class="ri-user-line" id="navLink"></i>
           </li>
 
           <li class="favourites" title="Favourite Items">
-            
-              <i class="ri-heart-line" id="navLink"></i>
-            
+            <i class="ri-heart-line" id="navLink"></i>
           </li>
 
           <li class="cart" title="Shopping Cart">
-            
-              <i class="ri-shopping-bag-line" id="navLink"></i>
-            
+            <i class="ri-shopping-bag-line" id="navLink"></i>
           </li>
         </ul>
 
@@ -78,7 +70,6 @@
 
     <!-- Popping Shopping Cart  -->
     <div class="shoppingCartContainer glasmorphism">
-
       <div class="returnArrow arrowCart">
         <i class="ri-arrow-left-line"></i>
       </div>
@@ -123,13 +114,28 @@
           <label for="signup" class="slide signup">Signup</label>
           <div class="slider-tab"></div>
         </div>
+
         <div class="form-inner">
-          <form action="#" class="login">
+          <form action="#" class="login" onsubmit="login()">
             <div class="field">
-              <input type="text" placeholder="Email Address" required />
+              <input
+                type="text"
+                placeholder="Email Address"
+                id="emailLogin"
+                required
+                oninvalid="this.setCustomValidity('Enter your email here')"
+                oninput="this.setCustomValidity('')"
+              />
             </div>
             <div class="field">
-              <input type="password" placeholder="Password" required />
+              <input
+                type="password"
+                placeholder="Password"
+                id="passwordLogin"
+                required
+                oninvalid="this.setCustomValidity('Wrong password')"
+                oninput="this.setCustomValidity('')"
+              />
             </div>
             <div class="pass-link">
               <a href="#">Forgot password?</a>
@@ -142,15 +148,37 @@
               Not a member? <a href="">Signup now</a>
             </div>
           </form>
-          <form action="#" class="signup">
+
+          <form action="#" class="signup" onsubmit="signup()">
             <div class="field">
-              <input type="text" placeholder="Email Address" required />
+              <input
+                type="text"
+                placeholder="Email Address"
+                id="emailSignup"
+                required
+                oninvalid="this.setCustomValidity('Enter your email here')"
+                oninput="this.setCustomValidity('')"
+              />
             </div>
             <div class="field">
-              <input type="password" placeholder="Password" required />
+              <input
+                type="password"
+                placeholder="Password"
+                id="passwordSignup"
+                required
+                oninvalid="this.setCustomValidity('Wrong password')"
+                oninput="this.setCustomValidity('')"
+              />
             </div>
             <div class="field">
-              <input type="password" placeholder="Confirm password" required />
+              <input
+                type="password"
+                placeholder="Confirm password"
+                id="passwordConfirmSignup"
+                required
+                oninvalid="this.setCustomValidity('Wrong password')"
+                oninput="this.setCustomValidity('')"
+              />
             </div>
             <div class="field btn">
               <div class="btn-layer"></div>
@@ -172,22 +200,22 @@
         <span>Your Wishlist</span>
       </div>
 
-        <div class="productCountDiv">
-            <span class="productCount">No</span>
-            <span class="products">Products</span>
-        </div>
+      <div class="productCountDiv">
+        <span class="productCount">No</span>
+        <span class="products">Products</span>
+      </div>
 
-        <div class="productsList"></div>
+      <span id="emptyFavText" class="emptyCartText"
+        >You need to like something first</span
+      >
 
-        
-        <div class="addToCartFromFav">
+      <div class="productsList"></div>
 
-          <button type="button" class="favClearList">Clear The List</button>
-          <button type="button" class="favContinue">Add & Continue</button>
-
-        </div>
+      <div class="addToCartFromFav">
+        <button type="button" class="favClearList">Clear The List</button>
+        <button type="button" class="favContinue">Add & Continue</button>
+      </div>
     </div>
-
 
     <!-- Grid Parent Under -->
     <div class="gridParent">
@@ -200,7 +228,6 @@
           </span>
           <button class="exploreBtn" onclick="exScroll()">Explore</button>
         </div>
-
 
         <div class="heroText">
           <h2>Lorem, ipsum.</h2>
@@ -252,8 +279,96 @@
         <h2>Comfy Shop</h2>
         <p>Make the house of your dreams with us.</p>
       </div>
-      <div>
-        <h2>Tutaj zrobić BestSellery (3), tak jak rozpisane na kartce</h2>
+
+      <div class="bestsellersGrid">
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
+
+          <div class="addToCart">Add to cart</div>
+          <div class="product one" id="heroItem1">
+            <img src="/Images/heroimg1.jpg" alt="product 1" />
+            <div class="productName">Spruce Table Set</div>
+            <div class="productPrice">$ 129.99</div>
+          </div>
+        </li>
+
+        <div class="description">
+          <h3>Why are we the best choice?</h3>
+          <br />
+
+          <span
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            quidem fugiat ipsum velit fugit ratione repellendus placeat
+            architecto nulla maiores?</span
+          >
+          <br />
+          <h4>Handmade</h4>
+          <br />
+
+          <h4>Eco-Friendly</h4>
+          <br />
+
+          <h4>Free shipping</h4>
+        </div>
+
+        <div class="description middle">
+          <h3>Origins</h3>
+          <br />
+
+          <span
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            quidem fugiat ipsum velit fugit ratione repellendus placeat
+            architecto nulla maiores?</span
+          >
+          <br />
+
+          <h4>Top Quality</h4>
+          <br />
+
+          <h4>Comfort Guaranteed</h4>
+        </div>
+
+        <li class="wholeProduct middlep">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
+
+          <div class="addToCart">Add to cart</div>
+          <div class="product one" id="heroItem2">
+            <img src="/Images/heroimg2.jpg" alt="product 1" />
+            <div class="productName">Oak Table Set</div>
+            <div class="productPrice">$ 149.99</div>
+          </div>
+        </li>
+
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
+
+          <div class="addToCart">Add to cart</div>
+          <div class="product one" id="heroItem3">
+            <img src="/Images/heroimg3.jpg" alt="product 1" />
+            <div class="productName">Garden Summer Set</div>
+            <div class="productPrice">$ 99.99</div>
+          </div>
+        </li>
+
+        <div class="description">
+          <h3>History</h3>
+          <br />
+
+          <span
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            quidem fugiat ipsum velit fugit ratione repellendus placeat
+            architecto nulla maiores?</span
+          >
+          <br />
+
+          <h4>Award Winning Design</h4>
+          <br />
+
+          <h4>Quality Of Life Improvements</h4>
+          <br />
+
+          <h4>The best on market since 1988</h4>
+        </div>
       </div>
 
       <div class="info">
@@ -263,7 +378,7 @@
       <div class="horizontalItemsDisplay">
         <ul class="mediaScroller">
           <li class="wholeProduct">
-              <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="wardrobe2">
               <img src="/Images/item1p2.jpg" alt="product 1" />
@@ -273,7 +388,7 @@
           </li>
 
           <li class="wholeProduct">
-              <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="chair3">
               <img src="/Images/item2p2.jpg" alt="product 1" />
@@ -283,7 +398,7 @@
           </li>
 
           <li class="wholeProduct">
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="sofa4">
@@ -294,7 +409,7 @@
           </li>
 
           <li class="wholeProduct">
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="chair4">
@@ -305,7 +420,7 @@
           </li>
 
           <li class="wholeProduct">
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="desk1">
@@ -316,7 +431,7 @@
           </li>
 
           <li class="wholeProduct">
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="table4">
@@ -327,7 +442,7 @@
           </li>
 
           <li class="wholeProduct">
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+            <div class="addToFav"><i class="ri-heart-line"></i></div>
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="sofa5">
@@ -350,11 +465,17 @@
       <!-- Other Info -->
 
       <div class="heroText">
-      <h2>Lorem, ipsum.</h2>
+        <h2>Lorem, ipsum.</h2>
 
-      <span class="htext">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor eaque reprehenderit iste iure expedita aut nihil in eius tenetur facilis ipsum dolore ex excepturi quo, totam magnam! Possimus assumenda iure voluptates laboriosam exercitationem aliquid odit quae nisi commodi veniam, quis sapiente, totam similique. Asperiores accusamus aperiam delectus omnis, voluptas consectetur.
-      </span>
+        <span class="htext">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor eaque
+          reprehenderit iste iure expedita aut nihil in eius tenetur facilis
+          ipsum dolore ex excepturi quo, totam magnam! Possimus assumenda iure
+          voluptates laboriosam exercitationem aliquid odit quae nisi commodi
+          veniam, quis sapiente, totam similique. Asperiores accusamus aperiam
+          delectus omnis, voluptas consectetur.
+        </span>
+      </div>
 
       <div class="info">
         <h2>Checkout our other products!</h2>
@@ -362,7 +483,7 @@
 
       <ul class="items">
         <li class="wholeProduct">
-          <div class="addToFav"><i class='ri-heart-line'></i></div>
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product one" id="sofa1">
@@ -372,8 +493,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product two" id="chair1">
@@ -383,8 +504,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product three" id="cupboard1">
@@ -395,8 +516,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product four" id="table1">
@@ -407,8 +528,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product five" id="table2">
@@ -419,8 +540,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product six" id="chair2">
@@ -431,8 +552,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product seven" id="table3">
@@ -443,8 +564,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product eight" id="sofa2">
@@ -455,8 +576,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product nine" id="wardrobe1">
@@ -467,8 +588,8 @@
           </div>
         </li>
 
-        <li class="wholeProduct"> 
-            <div class="addToFav"><i class='ri-heart-line'></i></div>
+        <li class="wholeProduct">
+          <div class="addToFav"><i class="ri-heart-line"></i></div>
 
           <div class="addToCart">Add to cart</div>
           <div class="product ten" id="sofa3">
@@ -483,7 +604,6 @@
       <button type="button" class="seeMore">
         See more products<span class="dots">..</span>
       </button>
-
     </div>
     <!-- Footer -->
 

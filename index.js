@@ -221,11 +221,6 @@ addToCart.forEach((button) => {
       }
     });
 
-    //   updateCartTotal();
-    // } else {
-    //   console.log('This item is already added :) ');
-    // }
-
     /* Changing the button text when adding the item --- */
 
     button.innerText = 'In the cart';
@@ -234,7 +229,6 @@ addToCart.forEach((button) => {
     button.style.color = 'whitesmoke';
 
     /* Clear Cart Button   */
-
     const clearButton = document.querySelector('.clearButton');
 
     clearButton.addEventListener('click', () => {
@@ -242,6 +236,11 @@ addToCart.forEach((button) => {
 
       removeAllChildNodes(cartItemsContainer);
       console.log('Cleared the shopping Cart');
+
+      let productBagCount = document.querySelector('.productBagCount');
+      let productsBag = document.querySelector('.productsBag');
+      productBagCount.innerText = 'No';
+      productsBag.innerText = 'Products';
 
       cartItemsContainer.append(emptyCartText);
       emptyCartText.style.display = 'block';
@@ -290,13 +289,9 @@ addToFav.forEach((btn) => {
     newIcon.classList.add('ri-heart-fill');
     btn.append(newIcon);
 
-    // let iconDiv = document.createElement('div');
-    // iconDiv.classList.add('iconDiv');
-
     let newIconInList = document.createElement('i');
     newIconInList.classList.add('ri-heart-fill');
     newIconInList.classList.add('removeFavItem');
-    // iconDiv.append(newIconInList);
 
     let wishListRow = document.createElement('div');
     wishListRow.classList.add('wishListRow');
@@ -311,7 +306,6 @@ addToFav.forEach((btn) => {
       wishSpanName.append(productName);
       wishSpanPrice.append(productPrice);
 
-      // wishListRow.append(iconDiv);
       wishListRow.append(newIconInList);
 
       wishListRow.append(favProductImg);
@@ -326,14 +320,45 @@ addToFav.forEach((btn) => {
       let changedIcon = btn.children[0];
       changedIcon.classList.replace('ri-heart-fill', 'ri-heart-line');
 
+      checkIfFavEmpty();
       checkFavCount();
 
       btn.style.cursor = 'pointer';
     });
 
+    let favClearList = document.querySelector('.favClearList');
+
+    favClearList.addEventListener('click', () => {
+      removeAllChildNodes(favProductsList);
+      checkIfFavEmpty();
+      checkFavCount();
+
+      btn.style.cursor = 'pointer';
+      btn.children[0].classList.replace('ri-heart-fill', 'ri-heart-line');
+      console.log('Deleted successfully');
+    });
+
+    checkIfFavEmpty();
     checkFavCount();
   });
 });
+
+/* Fav clear List */
+
+// let favProductsList = document.querySelector('.productsList');
+// let favItems = favProductsList.children;
+// --------------------------------------
+
+/* Empty Favlist text */
+function checkIfFavEmpty() {
+  let favProductsList = document.querySelector('.productsList');
+  let emptyFavText = document.querySelector('#emptyFavText');
+  if (favProductsList.children.length >= 1) {
+    emptyFavText.style.display = 'none';
+  } else {
+    emptyFavText.style.display = 'block';
+  }
+}
 
 /* Check fav list count ****** */
 
@@ -550,6 +575,59 @@ signupLink.onclick = () => {
   signupBtn.click();
   return false;
 };
+
+/* Local Storage for user settings */
+
+function signup(e) {
+  event.preventDefault();
+
+  let email = document.querySelector('#emailSignup').value;
+  let password = document.querySelector('#passwordSignup').value;
+  let passwordConfirm = document.querySelector('#passwordConfirmSignup').value;
+
+  let user = {
+    email: email,
+    password: password,
+    registrationDate: new Date().toLocaleDateString(),
+  };
+
+  if (password != passwordConfirm) {
+    console.log('Passwords dont match');
+  } else {
+    let userInStorage = JSON.stringify(user);
+    localStorage.setItem('user', userInStorage);
+
+    let emailInput = document.querySelector('#emailSignup');
+    let passwordInput = document.querySelector('#passwordSignup');
+    let passwordConfirmInput = document.querySelector('#passwordConfirmSignup');
+
+    emailInput.value = '';
+    passwordInput.value = '';
+    passwordConfirmInput.value = '';
+
+    profileMenu.classList.add('hidden');
+    profileButton.classList.remove('onDisplay');
+
+    console.log('Your account has been created'); //Make this a popup <3
+  }
+}
+
+function login(e) {
+  event.preventDefault();
+
+  let email = document.querySelector('#emailLogin').value;
+  let password = document.querySelector('#passwordLogin').value;
+
+  let retrievedUser = JSON.parse(localStorage.getItem('user'));
+
+  let username = retrievedUser.email.slice(0, retrievedUser.email.indexOf('@'));
+
+  if (email == retrievedUser.email && password == retrievedUser.password) {
+    console.log(`Welcome back ${username}`);
+  } else {
+    console.log('Incorrect email or password');
+  }
+}
 
 /* Return Arrows */
 
