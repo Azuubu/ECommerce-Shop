@@ -78,6 +78,84 @@ addToFav.forEach((fav, button, product) => {
   });
 });
 
+/* Searchbar */
+
+let searchbarDiv = document.querySelector('.searchbar');
+
+const userCardTemplate = document.querySelector('[data-user-template]');
+const userCardContainer = document.querySelector('[data-user-container]');
+const searchInput = document.querySelector('[data-search]');
+
+searchInput.addEventListener('focus', () => {
+  if (!searchInput.value == '') {
+    userCardContainer.classList.add('shown');
+  }
+});
+
+userCardContainer.addEventListener('click', () => {
+  userCardContainer.classList.remove('shown');
+});
+
+searchInput.addEventListener('click', (e) => {
+  items.forEach((item) => {
+    const value = e.target.value.toLowerCase();
+
+    const isShown = item.name.toLowerCase().includes(value);
+    item.element.classList.toggle('shown', isShown);
+  });
+});
+
+let items = [];
+
+searchInput.addEventListener('input', (e) => {
+  userCardContainer.classList.add('shown');
+
+  if (searchInput.value.length == 0) {
+    userCardContainer.classList.remove('shown');
+  }
+
+  const value = e.target.value.toLowerCase();
+
+  items.forEach((item) => {
+    const isShown = item.name.toLowerCase().includes(value);
+    item.element.classList.toggle('shown', isShown);
+  });
+});
+
+fetch('https://api.npoint.io/1f2fad207a98be2b2a7f')
+  .then((res) => res.json())
+  .then((data) => {
+    items = data.map((item) => {
+      const singleItem = userCardTemplate.content.cloneNode(true).children[0];
+      const name = singleItem.querySelector('[data-name]');
+      const price = singleItem.querySelector('[data-price]');
+
+      name.textContent = item.name;
+      price.textContent = item.price;
+
+      userCardContainer.append(singleItem);
+
+      // -------
+      singleItem.addEventListener('click', (e) => {
+        if (e.target.classList.contains('productNameSearch')) {
+          searchInput.value = e.target.innerText;
+        } else if (e.target.classList.contains('productPriceSearch')) {
+          searchInput.value = e.target.previousElementSibling.innerText;
+        } else {
+          searchInput.value = e.target.children[0].innerText;
+        }
+      });
+      // --------
+
+      return { name: item.name, price: item.price, element: singleItem };
+    });
+  });
+
+const searchIcon = document.querySelector('#startSearching');
+searchIcon.addEventListener('click', () => {
+  userCardContainer.classList.remove('shown');
+});
+
 /* Adding the actual product to the cart list */
 
 /* -***- Product Class -***- */
@@ -119,6 +197,11 @@ addToCart.forEach((button) => {
       actualQuantity,
       productPrice
     );
+
+    // DONEXT
+    // let cartProductImg = e.target.nextElementSibling
+    //   .querySelector('img')
+    //   .cloneNode();
 
     let singleProduct = document.createElement('div');
     singleProduct.classList.add('shoppingCartSingleProduct');
@@ -650,3 +733,107 @@ returnArrowFav.addEventListener('click', () => {
   favouritesButton.classList.remove('onDisplay');
   favouritesList.classList.remove('active');
 });
+
+// const singleItem = [
+//   {
+//     name: 'Modern Wooden Wardrobe',
+//     price: 49.99,
+//     id: 1,
+//   },
+
+//   {
+//     name: 'Posh Armchair',
+//     price: 39.99,
+//     id: 2,
+//   },
+
+//   {
+//     name: 'Large Corner Sofa',
+//     price: 49.99,
+//     id: 3,
+//   },
+
+//   {
+//     name: 'Minimalistic Chair',
+//     price: 19.99,
+//     id: 4,
+//   },
+
+//   {
+//     name: 'Wooden Desk',
+//     price: 29.99,
+//     id: 4,
+//   },
+
+//   {
+//     name: 'Minimalistic Wooden Table',
+//     price: 19.99,
+//     id: 5,
+//   },
+
+//   {
+//     name: 'Mini Corner Sofa',
+//     price: 39.99,
+//     id: 6,
+//   },
+
+//   {
+//     name: 'Mini Sofa',
+//     price: 59.99,
+//     id: 7,
+//   },
+
+//   {
+//     name: 'Old Fashioned Chair',
+//     price: 19.99,
+//     id: 8,
+//   },
+
+//   {
+//     name: 'Oak Cupboard',
+//     price: 69.99,
+//     id: 9,
+//   },
+
+//   {
+//     name: 'Modern Coffee Table',
+//     price: 39.99,
+//     id: 10,
+//   },
+
+//   {
+//     name: 'Small Table',
+//     price: 29.99,
+//     id: 11,
+//   },
+
+//   {
+//     name: 'Custom Chair',
+//     price: 19.99,
+//     id: 12,
+//   },
+
+//   {
+//     name: 'Wooden End Table',
+//     price: 39.99,
+//     id: 13,
+//   },
+
+//   {
+//     name: 'Garden Corner Sofa',
+//     price: 29.99,
+//     id: 14,
+//   },
+
+//   {
+//     name: 'Oak Wardrobe',
+//     price: 89.99,
+//     id: 15,
+//   },
+
+//   {
+//     name: 'Old Fashioned Couch',
+//     price: 39.99,
+//     id: 16,
+//   },
+// ];

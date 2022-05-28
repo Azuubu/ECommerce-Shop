@@ -21,6 +21,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js" defer></script>
     <title>Comfy Shop</title>
   </head>
   <body>
@@ -35,8 +36,18 @@
             placeholder="Search..."
             class="input"
             spellcheck="false"
+            data-search
           />
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-magnifying-glass" id="startSearching"></i>
+
+          <div class="searchbarItemList" data-user-container></div>
+
+          <template data-user-template>
+            <div class="singleItem">
+              <div class="productNameSearch" data-name></div>
+              <div class="productPriceSearch" data-price></div>
+            </div>
+          </template>
         </div>
 
         <!-- NavMenu -->
@@ -246,21 +257,6 @@
           <br />
           <br />
 
-          <h2>Lorem, ipsum dolor.</h2>
-
-          <span class="htext">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            <b>Eius</b>
-            maiores amet minima, aut ratione voluptates dolorem adipisci ex
-            distinctio tenetur deserunt molestiae ipsum, asperiores eveniet
-            nobis fugit molestias labore, rem magnam exercitationem recusandae
-            voluptas est tempore? Eveniet sed magnam sit. Asperiores labore
-            deserunt placeat quam.
-          </span>
-
-          <br />
-          <br />
-
           <h2>Lorem, ipsum?</h2>
 
           <span class="htext">
@@ -381,7 +377,7 @@
             <div class="addToFav"><i class="ri-heart-line"></i></div>
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="wardrobe2">
-              <img src="/Images/item1p2.jpg" alt="product 1" />
+              <img src="/Images/item1p2.jpg" alt="Modern Wooden Wardrobe" />
               <div class="productName">Modern Wooden Wardrobe</div>
               <div class="productPrice">$ 49.99</div>
             </div>
@@ -391,7 +387,7 @@
             <div class="addToFav"><i class="ri-heart-line"></i></div>
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="chair3">
-              <img src="/Images/item2p2.jpg" alt="product 1" />
+              <img src="/Images/item2p2.jpg" alt="Posh Armchair" />
               <div class="productName">Posh Armchair</div>
               <div class="productPrice">$ 39.99</div>
             </div>
@@ -402,7 +398,7 @@
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="sofa4">
-              <img src="/Images/item3p2.jpg" alt="product 1" />
+              <img src="/Images/item3p2.jpg" alt="Large Corner Sofa" />
               <div class="productName">Large Corner Sofa</div>
               <div class="productPrice">$ 49.99</div>
             </div>
@@ -413,7 +409,7 @@
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="chair4">
-              <img src="/Images/item4p2.jpg" alt="product 1" />
+              <img src="/Images/item4p2.jpg" alt="Minimalistic Chair" />
               <div class="productName">Minimalistic Chair</div>
               <div class="productPrice">$ 19.99</div>
             </div>
@@ -424,7 +420,7 @@
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="desk1">
-              <img src="/Images/item5p2.jpg" alt="product 1" />
+              <img src="/Images/item5p2.jpg" alt="Wooden Desk" />
               <div class="productName">Wooden Desk</div>
               <div class="productPrice">$ 29.99</div>
             </div>
@@ -435,7 +431,7 @@
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="table4">
-              <img src="/Images/item6p2.jpg" alt="product 1" />
+              <img src="/Images/item6p2.jpg" alt="Minimalistic Wooden Table" />
               <div class="productName">Minimalistic Wooden Table</div>
               <div class="productPrice">$ 19.99</div>
             </div>
@@ -446,7 +442,7 @@
 
             <div class="addToCart">Add to cart</div>
             <div class="product one" id="sofa5">
-              <img src="/Images/item7p2.jpeg" alt="product 1" />
+              <img src="/Images/item7p2.jpeg" alt="Mini Corner Sofa" />
               <div class="productName">Mini Corner Sofa</div>
               <div class="productPrice">$ 39.99</div>
             </div>
@@ -487,7 +483,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product one" id="sofa1">
-            <img src="/Images/item1.jpg" alt="product 1" />
+            <img src="/Images/item1.jpg" alt="Mini Sofa" />
             <div class="productName">Mini Sofa</div>
             <div class="productPrice">$ 59.99</div>
           </div>
@@ -498,7 +494,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product two" id="chair1">
-            <img src="/Images/item2.jpg" alt="product 2" />
+            <img src="/Images/item2.jpg" alt="Old Fashioned Chair" />
             <div class="productName">Old Fashioned Chair</div>
             <div class="productPrice">$ 19.99</div>
           </div>
@@ -509,7 +505,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product three" id="cupboard1">
-            <img src="/Images/item3.jpg" alt="product 3" />
+            <img src="/Images/item3.jpg" alt="Oak Cupboard" />
 
             <div class="productName">Oak Cupboard</div>
             <div class="productPrice">$ 69.99</div>
@@ -521,7 +517,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product four" id="table1">
-            <img src="/Images/item4.jpg" alt="product 4" />
+            <img src="/Images/item4.jpg" alt="Modern Coffee Table" />
 
             <div class="productName">Modern Coffee Table</div>
             <div class="productPrice">$ 39.99</div>
@@ -533,7 +529,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product five" id="table2">
-            <img src="/Images/item5.jpg" alt="product 5" />
+            <img src="/Images/item5.jpg" alt="Small Table" />
 
             <div class="productName">Small Table</div>
             <div class="productPrice">$ 29.99</div>
@@ -545,7 +541,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product six" id="chair2">
-            <img src="/Images/item6.jpg" alt="product 6" />
+            <img src="/Images/item6.jpg" alt="Custom Chair" />
 
             <div class="productName">Custom Chair</div>
             <div class="productPrice">$ 19.99</div>
@@ -557,7 +553,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product seven" id="table3">
-            <img src="/Images/item7.jpg" alt="product 7" />
+            <img src="/Images/item7.jpg" alt="Wooden End Table" />
 
             <div class="productName">Wooden End Table</div>
             <div class="productPrice">$ 39.99</div>
@@ -569,7 +565,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product eight" id="sofa2">
-            <img src="/Images/item8.jpg" alt="product 8" />
+            <img src="/Images/item8.jpg" alt="Garden Corner Sofa" />
 
             <div class="productName">Garden Corner Sofa</div>
             <div class="productPrice">$ 29.99</div>
@@ -581,7 +577,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product nine" id="wardrobe1">
-            <img src="/Images/item9.jpg" alt="product 9" />
+            <img src="/Images/item9.jpg" alt="Oak Wardrobe" />
 
             <div class="productName">Oak Wardrobe</div>
             <div class="productPrice">$ 89.99</div>
@@ -593,7 +589,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product ten" id="sofa3">
-            <img src="/Images/item10.jpg" alt="product 10" />
+            <img src="/Images/item10.jpg" alt="Old Fashioned Couch" />
 
             <div class="productName">Old Fashioned Couch</div>
             <div class="productPrice">$ 39.99</div>
@@ -657,6 +653,6 @@
       <div class="rightsReserved">© Copyright 2022 - Comfy Shop</div>
     </footer>
 
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
   </body>
 </html>

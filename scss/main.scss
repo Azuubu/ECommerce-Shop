@@ -8,6 +8,12 @@
   }
 }
 
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
 @mixin transition($duration) {
   transition: $duration ease-out;
 }
@@ -16,7 +22,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: -56em;
+  top: -150em;
   right: 0;
   z-index: 2;
   padding: 2rem;
@@ -330,6 +336,10 @@ a {
   font-size: 2.3rem;
   user-select: none;
   font-family: 'DM Serif Display', serif;
+
+  @include mobile {
+    max-width: 120px;
+  }
 }
 
 h2 {
@@ -389,20 +399,28 @@ nav {
 
 /*  --- SEARCHBAR  ---------------------------- */
 .searchbar {
+  position: relative;
   display: flex;
-  width: fit-content;
   align-items: center;
-  background-color: white;
-  min-height: 1.9em;
-  font-size: 1.3em;
+  background-color: $bg-color;
+  min-height: 1.7em;
+  font-size: 1.4em;
   margin-left: 1em;
   margin-right: auto;
   box-shadow: 0 1px 5px black;
+  padding-right: 2.5rem;
+
+  min-width: 30vw; /* 15vw */
+  max-width: 35vw; /* 25vw*/
+
+  @include mobile {
+    margin-left: 0;
+  }
 }
 
 .searchbar input {
-  min-width: 15vw;
-  max-width: 30vw;
+  min-width: 20vw; /* 15vw */
+  max-width: 30vw; /* 30vw*/
   min-height: 3vh;
 
   border: none;
@@ -411,6 +429,7 @@ nav {
   font-size: 1rem;
   font-weight: 500;
   padding-left: 0.5rem;
+  background-color: $bg-color;
 }
 
 .searchbar input::placeholder {
@@ -418,10 +437,14 @@ nav {
 }
 
 .fa-magnifying-glass {
+  position: absolute;
+  right: 0.2rem;
+
   padding: 0.2em;
   transition: 0.3s ease;
   cursor: pointer;
   color: var(--font-color);
+  margin-right: auto;
 }
 
 /* ---- HAMBURGER ----------------------- */
@@ -472,7 +495,7 @@ nav {
 
 .hero img {
   width: 100vw;
-  min-height: 90vh;
+  height: calc(100vh - 6em);
   object-fit: cover;
   opacity: 0.4;
 }
@@ -532,14 +555,14 @@ nav {
   letter-spacing: 3px;
   font-family: 'DM Serif Display', serif;
 
-  /* background-color: var(--primary-color); */
+  background-color: var(--primary-color);
 
   /* Glassmorphism effect */
-  background: rgba(182, 48, 48, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 10px;
+  // background: rgba(182, 48, 48, 0.25);
+  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  // backdrop-filter: blur(15px);
+  // -webkit-backdrop-filter: blur(15px);
+  // border-radius: 10px;
   /* border: 1px solid rgba(255, 255, 255, 0.18); */
 
   filter: drop-shadow(3px 3px 6px rgb(24, 23, 23));
@@ -1612,12 +1635,68 @@ form .btn input[type='submit'] {
   display: none;
 }
 
+.shown {
+  display: flex !important;
+}
+
 .errorStatus,
 .errorStatusText {
   margin: 1em;
   padding: 1em;
   font-size: 3rem;
   letter-spacing: 2px;
+}
+
+/* SEARCHBAR ITEM LIST */
+
+.searchbarItemList {
+  border: 1px solid $bg-darker;
+  background-color: $bg-color;
+
+  z-index: 2;
+  position: absolute;
+  top: 2.4rem;
+
+  overscroll-behavior: contain;
+
+  display: none;
+  flex-direction: column;
+
+  overflow-y: scroll;
+  min-height: 10vh;
+  max-height: 30vh;
+
+  min-width: 30vw;
+  max-width: 35vw;
+
+  .singleItem {
+    display: none;
+
+    position: relative;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+
+    border-bottom: 1px solid $bg-darker;
+
+    cursor: pointer;
+
+    @include mobile {
+      font-size: 0.8rem;
+      padding-left: 0.2rem;
+    }
+    @include desktop {
+      padding: 1rem;
+      gap: 2rem;
+    }
+
+    &:hover {
+      background-color: $bg-darker;
+    }
+  }
+
+  .productPriceSearch {
+    margin-left: auto;
+  }
 }
 
 /* ! TO DO LIST: ******************************
