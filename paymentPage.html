@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/dist/css/paymentpage.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- REMIX ICONS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- FONTAWESOME ICONS -->
+    <script
+      src="https://kit.fontawesome.com/71d9d8834f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- FavIcons-->
+    <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="Images/favicon.ico" type="image/x-icon" />
+    <title>Comfy Shop</title>
+  </head>
+  <body>
+    <header class="logo">Comfy Shop</header>
+
+    <h2 class="thankYou">Thank You for shopping with us!</h2>
+
+    <div class="flexRow container">
+      <div class="flexRow allTheInfo">
+        <div class="flexColumn addressInfo">
+          <h3 class="addressTitle">Address Info</h3>
+          <input type="text" class="city" placeholder="City" />
+          <input type="text" class="street" placeholder="Address" />
+
+          <div class="flexRow">
+            <input type="text" class="postCode half" placeholder="Post Code" />
+            <input
+              type="text"
+              class="phoneNumber half"
+              placeholder="Phone Number"
+            />
+          </div>
+          <div class="shippingPrice">Shipping costs involved*</div>
+        </div>
+
+        <div class="flexColumn paymentMethod">
+          <h3 class="paymentTitle">Payment Method</h3>
+
+          <label class="payment">
+            <input type="radio" name="payment" />
+            <span>Visa / Mastercard</span>
+          </label>
+
+          <label class="payment">
+            <input type="radio" name="payment" />
+            <span>Blik</span>
+          </label>
+
+          <label class="payment">
+            <input type="radio" name="payment" />
+            <span>Bank Transfer</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="finalizeThePayment">
+        Finalize The Payment<i class="fa-solid fa-arrow-right-long"></i>
+      </button>
+      <button
+        type="button"
+        class="returnButton"
+        onclick="window.location.href='project.html'"
+      >
+        Return<i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
+    </div>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="dist/css/main.css" />
-    <link rel="stylesheet" href="project.css" />
+
     <!-- FONTAWESOME ICONS -->
     <script
       src="https://kit.fontawesome.com/71d9d8834f.js"
@@ -18,6 +18,10 @@
     <link rel="shortcut icon" href="Images/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="Images/favicon.ico" type="image/x-icon" />
 
+    <meta
+      name="description"
+      content="Our website ensures great user experience alongside with the best furniture available on the market"
+    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,6 +41,7 @@
             class="input"
             spellcheck="false"
             data-search
+            autocomplete="off"
           />
           <i class="fa-solid fa-magnifying-glass" id="startSearching"></i>
 
@@ -79,6 +84,22 @@
       </nav>
     </header>
 
+    <!-- TOAST MESSAGE -->
+
+    <div class="toast">
+      <div class="toast-content">
+        <i class="fas fa-solid fa-check check"></i>
+
+        <div class="message">
+          <span class="text text-1">Success</span>
+          <span class="text text-2 toastSpan"></span>
+        </div>
+      </div>
+      <i class="fa-solid fa-xmark close"></i>
+
+      <div class="progress"></div>
+    </div>
+
     <!-- Popping Shopping Cart  -->
     <div class="shoppingCartContainer glasmorphism">
       <div class="returnArrow arrowCart">
@@ -103,13 +124,20 @@
           Total: <span class="dynamicValue">$0</span>
         </section>
 
-        <button type="button" class="purchaseButton">Continue</button>
+        <button
+          type="button"
+          class="purchaseButton"
+          onclick="window.location.href='paymentPage.html'"
+        >
+          Continue
+        </button>
+
         <button type="button" class="clearButton">Clear Cart</button>
       </footer>
     </div>
 
     <!-- User Profile Menu -->
-    <div class="wrapper glasmorphism hidden">
+    <div class="wrapper glasmorphism" spellcheck="false">
       <div class="returnArrow arrowUser">
         <i class="ri-arrow-left-line"></i>
       </div>
@@ -127,7 +155,7 @@
         </div>
 
         <div class="form-inner">
-          <form action="#" class="login" onsubmit="login()">
+          <form action="#" class="login" onsubmit="login()" autocomplete="off">
             <div class="field">
               <input
                 type="text"
@@ -144,16 +172,17 @@
                 placeholder="Password"
                 id="passwordLogin"
                 required
+                autocomplete="off"
                 oninvalid="this.setCustomValidity('Wrong password')"
                 oninput="this.setCustomValidity('')"
               />
             </div>
             <div class="pass-link">
-              <a href="#">Forgot password?</a>
+              <a href="pageInProgress.html">Forgot password?</a>
             </div>
             <div class="field btn">
               <div class="btn-layer"></div>
-              <input type="submit" value="Login" />
+              <input type="submit" value="Login" id="loginInput" />
             </div>
             <div class="signup-link">
               Not a member? <a href="">Signup now</a>
@@ -167,6 +196,7 @@
                 placeholder="Email Address"
                 id="emailSignup"
                 required
+                autocomplete="off"
                 oninvalid="this.setCustomValidity('Enter your email here')"
                 oninput="this.setCustomValidity('')"
               />
@@ -177,6 +207,7 @@
                 placeholder="Password"
                 id="passwordSignup"
                 required
+                autocomplete="off"
                 oninvalid="this.setCustomValidity('Wrong password')"
                 oninput="this.setCustomValidity('')"
               />
@@ -187,13 +218,19 @@
                 placeholder="Confirm password"
                 id="passwordConfirmSignup"
                 required
+                autocomplete="off"
                 oninvalid="this.setCustomValidity('Wrong password')"
                 oninput="this.setCustomValidity('')"
               />
             </div>
             <div class="field btn">
               <div class="btn-layer"></div>
-              <input class="signup" type="submit" value="Signup" />
+              <input
+                class="signup"
+                type="submit"
+                value="Signup"
+                id="signupInput"
+              />
             </div>
           </form>
         </div>
@@ -224,7 +261,6 @@
 
       <div class="addToCartFromFav">
         <button type="button" class="favClearList">Clear The List</button>
-        <button type="button" class="favContinue">Add & Continue</button>
       </div>
     </div>
 
@@ -232,7 +268,7 @@
     <div class="gridParent">
       <div class="hero">
         <div class="heroMenu">
-          <img src="Images/herobg2.jpg" />
+          <img src="Images/herobg2.jpg" alt="" />
 
           <span class="heroLandingQuote">
             Experience the real level of comfort
@@ -241,22 +277,6 @@
         </div>
 
         <div class="heroText">
-          <h2>Lorem, ipsum.</h2>
-
-          <span class="htext">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem in
-            repudiandae, expedita est tenetur eaque enim, sunt, quo culpa quia
-            commodi deleniti quis voluptate. Nisi sequi quaerat cumque?
-
-            <br />
-            <b>Minima</b> porro perferendis aspernatur incidunt hic aut cum
-            reprehenderit labore quo deserunt ullam odio ipsam quisquam
-            distinctio nemo quod, veniam est repellendus!
-          </span>
-
-          <br />
-          <br />
-
           <h2>Lorem, ipsum?</h2>
 
           <span class="htext">
@@ -282,7 +302,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product one" id="heroItem1">
-            <img src="/Images/heroimg1.jpg" alt="product 1" />
+            <img src="/Images/heroimg1.jpg" alt="product 1" loading="lazy" />
             <div class="productName">Spruce Table Set</div>
             <div class="productPrice">$ 129.99</div>
           </div>
@@ -329,7 +349,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product one" id="heroItem2">
-            <img src="/Images/heroimg2.jpg" alt="product 1" />
+            <img src="/Images/heroimg2.jpg" alt="product 1" loading="lazy" />
             <div class="productName">Oak Table Set</div>
             <div class="productPrice">$ 149.99</div>
           </div>
@@ -340,7 +360,7 @@
 
           <div class="addToCart">Add to cart</div>
           <div class="product one" id="heroItem3">
-            <img src="/Images/heroimg3.jpg" alt="product 1" />
+            <img src="/Images/heroimg3.jpg" alt="product 1" loading="lazy" />
             <div class="productName">Garden Summer Set</div>
             <div class="productPrice">$ 99.99</div>
           </div>
@@ -597,8 +617,16 @@
         </li>
       </ul>
 
-      <button type="button" class="seeMore">
-        See more products<span class="dots">..</span>
+      <button type="button" class="seeMore hoverEffect">
+        <div class="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <span class="seeMoreText">
+          See more products<span class="dots">..</span></span
+        >
       </button>
     </div>
     <!-- Footer -->

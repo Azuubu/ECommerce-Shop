@@ -408,7 +408,7 @@ addToFav.forEach((btn) => {
 
       btn.style.cursor = 'pointer';
     });
-
+    /* Fav clear List */
     let favClearList = document.querySelector('.favClearList');
 
     favClearList.addEventListener('click', () => {
@@ -425,12 +425,6 @@ addToFav.forEach((btn) => {
     checkFavCount();
   });
 });
-
-/* Fav clear List */
-
-// let favProductsList = document.querySelector('.productsList');
-// let favItems = favProductsList.children;
-// --------------------------------------
 
 /* Empty Favlist text */
 function checkIfFavEmpty() {
@@ -513,7 +507,7 @@ const homeButton = document.querySelector('.home');
 homeButton.addEventListener('click', () => {
   shoppingCartContainer.classList.remove('active');
   favouritesList.classList.remove('active');
-  profileMenu.classList.add('hidden');
+  profileMenu.classList.remove('show');
 });
 
 /*  Cart Container Page ****************** */
@@ -559,7 +553,7 @@ shoppingCartButton.addEventListener('click', () => {
 
   profileButton.classList.remove('onDisplay');
 
-  profileMenu.classList.add('hidden');
+  profileMenu.classList.remove('show');
 
   favouritesButton.classList.remove('onDisplay');
   favouritesList.classList.remove('active');
@@ -570,7 +564,7 @@ favouritesButton.addEventListener('click', () => {
   favouritesList.classList.toggle('active');
 
   profileButton.classList.remove('onDisplay');
-  profileMenu.classList.add('hidden');
+  profileMenu.classList.remove('show');
 
   shoppingCartButton.classList.remove('onDisplay');
   shoppingCartContainer.classList.remove('active');
@@ -612,6 +606,28 @@ seeMoreProductsButton.addEventListener('mouseover', () => {
 seeMoreProductsButton.addEventListener('mouseout', () => {
   seeMoreProductsDots.style.opacity = 0;
 });
+let seeMoreText = document.querySelector('.seeMoreText');
+let loadingAnimation = document.querySelector('.lds-ellipsis');
+
+seeMoreProductsButton.addEventListener(
+  'click',
+  () => {
+    loadingAnimation.classList.add('loading');
+    seeMoreProductsButton.classList.add('loading');
+    seeMoreText.innerText = '';
+    seeMoreProductsButton.style.cursor = 'default';
+    seeMoreProductsButton.classList.remove('hoverEffect');
+
+    function showResult() {
+      seeMoreText.innerText = 'This is all for now';
+      loadingAnimation.classList.remove('loading');
+      seeMoreProductsButton.classList.remove('loading');
+      seeMoreProductsButton.classList.add('redBg');
+    }
+    setTimeout(showResult, 2000);
+  },
+  { once: true }
+);
 /* ----- */
 
 /* Horizontal Scrolling Function -> Button Onclick */
@@ -638,7 +654,7 @@ function exScroll() {
 let profileMenu = document.querySelector('.wrapper');
 
 profileButton.addEventListener('click', () => {
-  profileMenu.classList.toggle('hidden');
+  profileMenu.classList.toggle('show');
 });
 
 const loginText = document.querySelector('.title-text .login');
@@ -660,6 +676,7 @@ signupLink.onclick = () => {
 };
 
 /* Local Storage for user settings */
+let toastSpan = document.querySelector('.toastSpan');
 
 function signup(e) {
   event.preventDefault();
@@ -684,14 +701,23 @@ function signup(e) {
     let passwordInput = document.querySelector('#passwordSignup');
     let passwordConfirmInput = document.querySelector('#passwordConfirmSignup');
 
+    toast.classList.add('active');
+    progress.classList.add('active');
+
+    timer1 = setTimeout(() => {
+      toast.classList.remove('active');
+    }, 5000);
+
+    timer2 = setTimeout(() => {
+      progress.classList.remove('active');
+    }, 5300);
+
     emailInput.value = '';
     passwordInput.value = '';
     passwordConfirmInput.value = '';
 
-    profileMenu.classList.add('hidden');
-    profileButton.classList.remove('onDisplay');
-
-    console.log('Your account has been created'); //Make this a popup <3
+    toastSpan.innerText = 'Your account has been created';
+    loginBtn.click();
   }
 }
 
@@ -707,6 +733,20 @@ function login(e) {
 
   if (email == retrievedUser.email && password == retrievedUser.password) {
     console.log(`Welcome back ${username}`);
+    profileMenu.classList.remove('show');
+    profileButton.classList.remove('onDisplay');
+    toastSpan.innerText = `Welcome back ${username}!`;
+
+    toast.classList.add('active');
+    progress.classList.add('active');
+
+    timer1 = setTimeout(() => {
+      toast.classList.remove('active');
+    }, 5000);
+
+    timer2 = setTimeout(() => {
+      progress.classList.remove('active');
+    }, 5300);
   } else {
     console.log('Incorrect email or password');
   }
@@ -725,13 +765,33 @@ let returnArrowUser = document.querySelector('.arrowUser');
 returnArrowUser.addEventListener('click', () => {
   profileButton.classList.remove('onDisplay');
 
-  profileMenu.classList.add('hidden');
+  profileMenu.classList.remove('show');
 });
 
 let returnArrowFav = document.querySelector('.arrowFav');
 returnArrowFav.addEventListener('click', () => {
   favouritesButton.classList.remove('onDisplay');
   favouritesList.classList.remove('active');
+});
+
+// Toast Messages
+
+const loginButton = document.querySelector('#signupInput');
+toast = document.querySelector('.toast');
+closeIcon = document.querySelector('.close');
+progress = document.querySelector('.progress');
+
+let timer1, timer2;
+
+closeIcon.addEventListener('click', () => {
+  toast.classList.remove('active');
+
+  setTimeout(() => {
+    progress.classList.remove('active');
+  }, 300);
+
+  clearTimeout(timer1);
+  clearTimeout(timer2);
 });
 
 // const singleItem = [

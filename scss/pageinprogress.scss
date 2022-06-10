@@ -1,0 +1,88 @@
+@import '../scss/variables';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $bg-darker;
+  height: 100vh;
+  overflow: hidden;
+
+  color: black;
+}
+
+.fa-arrow-right-to-bracket {
+  padding-left: 10px;
+}
+
+.container {
+  line-height: 2;
+  padding: 2rem;
+  width: fit-content;
+  margin: 1rem auto;
+}
+
+.info {
+  font-size: 2rem;
+  width: fit-content;
+}
+
+.subInfo {
+  width: fit-content;
+}
+
+.status {
+  top: 0;
+  left: 0;
+  position: absolute;
+
+  padding: 1rem;
+  user-select: none;
+
+  font-size: 3rem;
+  letter-spacing: 3px;
+
+  opacity: 0.1;
+}
+
+.logo {
+  box-shadow: 0 5px 5px black;
+  background-color: $primary-color;
+
+  padding: 1rem;
+
+  font-size: 3rem;
+  letter-spacing: 3px;
+  font-family: 'DM Serif Display', serif;
+  text-align: center;
+}
+
+.getBackHere {
+  margin-top: 1rem;
+  border: 1px solid black;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  user-select: none;
+  font-size: 1rem;
+  font-weight: 300;
+
+  background-color: $primary-color;
+  color: whitesmoke;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-color-hover;
+  }
+
+  &:active {
+    background-color: $primary-color-active;
+  }
+}
