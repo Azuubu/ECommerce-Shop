@@ -138,6 +138,22 @@
 
     <!-- User Profile Menu -->
     <div class="wrapper glasmorphism" spellcheck="false">
+      <div class="userProfileBoard">
+        <div class="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+
+        <div class="userHero">
+          <div class="userProfilePicture"></div>
+          <div class="username"></div>
+        </div>
+
+        <div class="buttonsContainer">
+          <button type="button" class="premiumBtn">Get Premium Now!</button>
+          <button type="button" class="standardBtn">Payment History</button>
+          <button type="button" class="standardBtn">User Details</button>
+          <button type="button" class="standardBtn">Check Balance</button>
+        </div>
+      </div>
+
       <div class="returnArrow arrowUser">
         <i class="ri-arrow-left-line"></i>
       </div>
@@ -158,7 +174,7 @@
           <form action="#" class="login" onsubmit="login()" autocomplete="off">
             <div class="field">
               <input
-                type="text"
+                type="email"
                 placeholder="Email Address"
                 id="emailLogin"
                 required
@@ -166,6 +182,7 @@
                 oninput="this.setCustomValidity('')"
               />
             </div>
+
             <div class="field">
               <input
                 type="password"
@@ -180,19 +197,20 @@
             <div class="pass-link">
               <a href="pageInProgress.html">Forgot password?</a>
             </div>
+
+            <div class="errorMsg">Incorrect email or password!</div>
+
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Login" id="loginInput" />
             </div>
-            <div class="signup-link">
-              Not a member? <a href="">Signup now</a>
-            </div>
+            <div class="signup-link">Not a member? <a href="">Signup now</a></div>
           </form>
 
           <form action="#" class="signup" onsubmit="signup()">
             <div class="field">
               <input
-                type="text"
+                type="email"
                 placeholder="Email Address"
                 id="emailSignup"
                 required
@@ -223,14 +241,12 @@
                 oninput="this.setCustomValidity('')"
               />
             </div>
+
+            <div class="passwordsNoMatchError">Passwords don't match!</div>
+
             <div class="field btn">
               <div class="btn-layer"></div>
-              <input
-                class="signup"
-                type="submit"
-                value="Signup"
-                id="signupInput"
-              />
+              <input class="signup" type="submit" value="Signup" id="signupInput" />
             </div>
           </form>
         </div>
@@ -270,22 +286,19 @@
         <div class="heroMenu">
           <img src="Images/herobg2.jpg" alt="" />
 
-          <span class="heroLandingQuote">
-            Experience the real level of comfort
-          </span>
+          <span class="heroLandingQuote"> Experience the real level of comfort </span>
           <button class="exploreBtn" onclick="exScroll()">Explore</button>
         </div>
 
         <div class="heroText">
-          <h2>Lorem, ipsum?</h2>
+          <h2>Buy 1, get 1 for FREE</h2>
 
           <span class="htext">
-            <b>Lorem</b> ipsum, dolor sit amet consectetur adipisicing elit. Eos
-            magni exercitationem omnis accusamus asperiores nulla cupiditate nam
-            assumenda, dolorem numquam eum accusantium rem consectetur
-            doloremque vitae molestiae vel delectus quisquam eveniet vero neque
-            quaerat odit sint fugiat! Accusantium necessitatibus at totam
-            expedita! Ut, placeat. Fuga!
+            <b>Lorem</b> ipsum, dolor sit amet consectetur adipisicing elit. Eos magni
+            exercitationem omnis accusamus asperiores nulla cupiditate nam assumenda,
+            dolorem numquam eum accusantium rem consectetur doloremque vitae molestiae vel
+            delectus quisquam eveniet vero neque quaerat odit sint fugiat! Accusantium
+            necessitatibus at totam expedita! Ut, placeat. Fuga!
           </span>
         </div>
       </div>
@@ -313,9 +326,9 @@
           <br />
 
           <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            quidem fugiat ipsum velit fugit ratione repellendus placeat
-            architecto nulla maiores?</span
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis quidem
+            fugiat ipsum velit fugit ratione repellendus placeat architecto nulla
+            maiores?</span
           >
           <br />
           <h4>Handmade</h4>
@@ -332,9 +345,9 @@
           <br />
 
           <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            quidem fugiat ipsum velit fugit ratione repellendus placeat
-            architecto nulla maiores?</span
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis quidem
+            fugiat ipsum velit fugit ratione repellendus placeat architecto nulla
+            maiores?</span
           >
           <br />
 
@@ -371,9 +384,9 @@
           <br />
 
           <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            quidem fugiat ipsum velit fugit ratione repellendus placeat
-            architecto nulla maiores?</span
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis quidem
+            fugiat ipsum velit fugit ratione repellendus placeat architecto nulla
+            maiores?</span
           >
           <br />
 
@@ -481,15 +494,14 @@
       <!-- Other Info -->
 
       <div class="heroText">
-        <h2>Lorem, ipsum.</h2>
+        <h2>How we care about quality</h2>
 
         <span class="htext">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor eaque
-          reprehenderit iste iure expedita aut nihil in eius tenetur facilis
-          ipsum dolore ex excepturi quo, totam magnam! Possimus assumenda iure
-          voluptates laboriosam exercitationem aliquid odit quae nisi commodi
-          veniam, quis sapiente, totam similique. Asperiores accusamus aperiam
-          delectus omnis, voluptas consectetur.
+          reprehenderit iste iure expedita aut nihil in eius tenetur facilis ipsum dolore
+          ex excepturi quo, totam magnam! Possimus assumenda iure voluptates laboriosam
+          exercitationem aliquid odit quae nisi commodi veniam, quis sapiente, totam
+          similique. Asperiores accusamus aperiam delectus omnis, voluptas consectetur.
         </span>
       </div>
 
@@ -624,12 +636,13 @@
           <div></div>
           <div></div>
         </div>
-        <span class="seeMoreText">
-          See more products<span class="dots">..</span></span
-        >
+        <span class="seeMoreText"> See more products<span class="dots">..</span></span>
       </button>
     </div>
     <!-- Footer -->
+    <button type="button" class="goUp" onclick="scrollBackUp()">
+      Scroll back <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
     <footer id="contactInfo">
       <div class="footerFlex">

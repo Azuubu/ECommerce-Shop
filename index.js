@@ -191,12 +191,7 @@ addToCart.forEach((button) => {
 
     /* Each new product used in constructor */
 
-    let product1 = new Product(
-      productId,
-      productName,
-      actualQuantity,
-      productPrice
-    );
+    let product1 = new Product(productId, productName, actualQuantity, productPrice);
 
     // DONEXT
     // let cartProductImg = e.target.nextElementSibling
@@ -353,13 +348,11 @@ addToFav.forEach((btn) => {
         '.productPrice'
       ).innerText;
 
-    let favProductImg =
-      e.target.parentElement.nextElementSibling.nextElementSibling
-        .querySelector('img')
-        .cloneNode();
+    let favProductImg = e.target.parentElement.nextElementSibling.nextElementSibling
+      .querySelector('img')
+      .cloneNode();
 
-    let favItemId =
-      e.target.parentElement.nextElementSibling.nextElementSibling.id;
+    let favItemId = e.target.parentElement.nextElementSibling.nextElementSibling.id;
 
     let wishSpanName = document.createElement('span');
     let wishSpanPrice = document.createElement('span');
@@ -573,20 +566,15 @@ favouritesButton.addEventListener('click', () => {
 /* Updating Cart Total Summ ------- */
 
 function updateCartTotal() {
-  var cartItemContainer = document.getElementsByClassName(
-    'shoppingCartContainer'
-  )[0];
+  var cartItemContainer = document.getElementsByClassName('shoppingCartContainer')[0];
 
-  var cartRows = cartItemContainer.getElementsByClassName(
-    'shoppingCartSingleProduct'
-  );
+  var cartRows = cartItemContainer.getElementsByClassName('shoppingCartSingleProduct');
 
   var total = 0;
   for (var i = 0; i < cartRows.length; i++) {
     var cartRow = cartRows[i];
     var priceElement = cartRow.getElementsByClassName('shoppingCartPrices')[0];
-    var quantityElement =
-      cartRow.getElementsByClassName('quantityOfProduct')[0];
+    var quantityElement = cartRow.getElementsByClassName('quantityOfProduct')[0];
     var price = parseFloat(priceElement.innerText.replace('$', ''));
     var quantity = quantityElement.innerText;
     total = total + price * quantity;
@@ -685,6 +673,8 @@ function signup(e) {
   let password = document.querySelector('#passwordSignup').value;
   let passwordConfirm = document.querySelector('#passwordConfirmSignup').value;
 
+  let passwordsNoMatchError = document.querySelector('.passwordsNoMatchError');
+
   let user = {
     email: email,
     password: password,
@@ -692,7 +682,7 @@ function signup(e) {
   };
 
   if (password != passwordConfirm) {
-    console.log('Passwords dont match');
+    passwordsNoMatchError.classList.add('showError');
   } else {
     let userInStorage = JSON.stringify(user);
     localStorage.setItem('user', userInStorage);
@@ -700,6 +690,7 @@ function signup(e) {
     let emailInput = document.querySelector('#emailSignup');
     let passwordInput = document.querySelector('#passwordSignup');
     let passwordConfirmInput = document.querySelector('#passwordConfirmSignup');
+    passwordsNoMatchError.classList.remove('showError');
 
     toast.classList.add('active');
     progress.classList.add('active');
@@ -724,18 +715,37 @@ function signup(e) {
 function login(e) {
   event.preventDefault();
 
+  let usernameDisplayedOnProfile = document.querySelector('.username');
+
+  let userProfilePage = document.querySelector('.userProfileBoard');
+
   let email = document.querySelector('#emailLogin').value;
   let password = document.querySelector('#passwordLogin').value;
+
+  let loginErrorMsg = document.querySelector('.errorMsg');
 
   let retrievedUser = JSON.parse(localStorage.getItem('user'));
 
   let username = retrievedUser.email.slice(0, retrievedUser.email.indexOf('@'));
 
+  let titleText = document.querySelector('.title-text');
+  let formContainer = document.querySelector('.form-container');
+
+  let emailValue = document.querySelector('#emailLogin');
+  let passwordValue = document.querySelector('#passwordLogin');
+
   if (email == retrievedUser.email && password == retrievedUser.password) {
-    console.log(`Welcome back ${username}`);
-    profileMenu.classList.remove('show');
-    profileButton.classList.remove('onDisplay');
+    emailValue.value = '';
+    passwordValue.value = '';
+    username = username.charAt(0).toUpperCase() + username.slice(1);
+    usernameDisplayedOnProfile.innerText = `${username}`;
+
+    userProfilePage.classList.add('active');
+    titleText.classList.add('hidden');
+    formContainer.classList.add('hidden');
+
     toastSpan.innerText = `Welcome back ${username}!`;
+    loginErrorMsg.classList.remove('showError');
 
     toast.classList.add('active');
     progress.classList.add('active');
@@ -748,7 +758,7 @@ function login(e) {
       progress.classList.remove('active');
     }, 5300);
   } else {
-    console.log('Incorrect email or password');
+    loginErrorMsg.classList.add('showError');
   }
 }
 
@@ -794,106 +804,18 @@ closeIcon.addEventListener('click', () => {
   clearTimeout(timer2);
 });
 
-// const singleItem = [
-//   {
-//     name: 'Modern Wooden Wardrobe',
-//     price: 49.99,
-//     id: 1,
-//   },
+const scrollBackUp = () => {
+  window.scrollTo({ top: 0, behaviour: 'smooth' });
+};
 
-//   {
-//     name: 'Posh Armchair',
-//     price: 39.99,
-//     id: 2,
-//   },
+/* User Profile Page */
+let logoutBtn = document.querySelector('.logoutBtn');
+let userProfilePage = document.querySelector('.userProfileBoard');
+let titleText = document.querySelector('.title-text');
+let formContainer = document.querySelector('.form-container');
 
-//   {
-//     name: 'Large Corner Sofa',
-//     price: 49.99,
-//     id: 3,
-//   },
-
-//   {
-//     name: 'Minimalistic Chair',
-//     price: 19.99,
-//     id: 4,
-//   },
-
-//   {
-//     name: 'Wooden Desk',
-//     price: 29.99,
-//     id: 4,
-//   },
-
-//   {
-//     name: 'Minimalistic Wooden Table',
-//     price: 19.99,
-//     id: 5,
-//   },
-
-//   {
-//     name: 'Mini Corner Sofa',
-//     price: 39.99,
-//     id: 6,
-//   },
-
-//   {
-//     name: 'Mini Sofa',
-//     price: 59.99,
-//     id: 7,
-//   },
-
-//   {
-//     name: 'Old Fashioned Chair',
-//     price: 19.99,
-//     id: 8,
-//   },
-
-//   {
-//     name: 'Oak Cupboard',
-//     price: 69.99,
-//     id: 9,
-//   },
-
-//   {
-//     name: 'Modern Coffee Table',
-//     price: 39.99,
-//     id: 10,
-//   },
-
-//   {
-//     name: 'Small Table',
-//     price: 29.99,
-//     id: 11,
-//   },
-
-//   {
-//     name: 'Custom Chair',
-//     price: 19.99,
-//     id: 12,
-//   },
-
-//   {
-//     name: 'Wooden End Table',
-//     price: 39.99,
-//     id: 13,
-//   },
-
-//   {
-//     name: 'Garden Corner Sofa',
-//     price: 29.99,
-//     id: 14,
-//   },
-
-//   {
-//     name: 'Oak Wardrobe',
-//     price: 89.99,
-//     id: 15,
-//   },
-
-//   {
-//     name: 'Old Fashioned Couch',
-//     price: 39.99,
-//     id: 16,
-//   },
-// ];
+logoutBtn.addEventListener('click', () => {
+  userProfilePage.classList.remove('active');
+  titleText.classList.remove('hidden');
+  formContainer.classList.remove('hidden');
+});
