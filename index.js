@@ -1,4 +1,4 @@
-/* Popping up Hamburger Menu */
+/* Popping Up Hamburger Menu */
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.navMenu');
 
