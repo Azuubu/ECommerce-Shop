@@ -741,6 +741,7 @@ function login(e) {
     usernameDisplayedOnProfile.innerText = `${username}`;
 
     userProfilePage.classList.add('active');
+
     titleText.classList.add('hidden');
     formContainer.classList.add('hidden');
 
